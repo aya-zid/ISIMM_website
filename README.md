@@ -24,8 +24,21 @@
 
   registration))
 
+  (the passwords are encrypted (i used spring security) so even the admin himself won't be able to know a student password after adding it to the database unless he memorized it or saved it somewhere else
+
+  so if a student forget their password they can contact the admin and ask tbem for a new password )
+
   . manage the news (the updates) : add a new , delete a new , edit a new , check the news list , check the notifcations (in the notifications the admin will find the messages sent by normal users from the
 
   "contact us" in the menu bar of the home page
 
+- the student can :
+
+  . check their profile informations
+
+  . check the timetable
+
+  . check their marks
+
+  . check the news 
 
