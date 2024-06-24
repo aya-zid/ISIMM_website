@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website</title>
+ <link rel="stylesheet" href="nadine project.css">
+ <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+.logo a{
+  color: #f2f2f2;
+  font-size: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-right: 700px;
+  margin-left: 30px;
+}
+.menu ul {
+    list-style: none;
+    display: flex;
+}
+
+.menu ul li {
+    position: relative;
+}
+
+.menu ul li a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+}
+
+.menu ul li:hover > a {
+    background-color: #555;
+}
+
+/* Submenu styles */
+.menu ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #444;
+    z-index: 1000;
+}
+
+.menu ul ul ul {
+    top: 0;
+    left: 100%;
+    min-width: 200px;
+}
+
+.menu ul li:hover > ul {
+    display: block;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+.body-text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  padding: 0 30px;
+}
+.body-text div{
+  font-size: 45px;
+  font-weight: 600;
+}
+@keyframes slidy {
+    0% { left: 0%; }
+    20% { left: 0%; }
+    25% { left: -100%; }
+    45% { left: -100%; }
+    50% { left: -200%; }
+    70% { left: -200%; }
+    75% { left: -300%; }
+    95% { left: -300%; }
+    100% { left: -400%; }
+    }
+    
+    body { margin: 0; } 
+    div#slider { overflow: hidden; }
+    div#slider figure img { width: 20%; float: left; }
+    div#slider figure { 
+      position: relative;
+      width: 500%;
+      margin: 0;
+      left: 0;
+      text-align: left;
+      font-size: 0;
+      animation: 30s slidy infinite; 
+    }
+    .section {
+        display: flex;
+        align-items: flex-start;
+        padding-top: 70px;
+        background-color: #333333;
+        padding-bottom: 47px
+    }
+    
+    .content {
+        flex: 1;
+        padding-right: 98px;
+        color: white;
+        margin-top: -19px
+    }
+    
+    h2 {
+        margin-bottom: 10px;
+       padding-left: 25px;
+    }
+    p{
+padding-left: 26px;
+    }
+    .map {
+        flex: 1;
+    }
+        
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      
+      maindiv{
+        display: flex;
+        background-color: #f2f2f2;
+       
+      }
+      
+      aside {
+        color: #fff;
+        width: 250px;
+        padding-left: 20px;
+        height: 100vh;
+        background-image: linear-gradient(30deg , #0048bd, #44a7fd);
+        border-top-right-radius: 80px;
+        margin-top: 1px
+      }
+      
+      aside a {
+        font-size: 12px;
+        color: #fff;
+        display: block;
+        padding: 12px;
+        padding-left: 30px;
+        text-decoration: none;
+        -webkit-tap-highlight-color:transparent;
+      }
+      
+      aside a:hover {
+        color: #3f5efb;
+        background: #fff;
+        outline: none;
+        position: relative;
+        background-color: #fff;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+      }
+      
+      aside a i {
+        margin-right: 5px;
+      }
+      
+      aside a:hover::after {
+        content: "";
+        position: absolute;
+        background-color: transparent;
+        bottom: 100%;
+        right: 0;
+        height: 35px;
+        width: 35px;
+        border-bottom-right-radius: 18px;
+        box-shadow: 0 20px 0 0 #fff;
+      }
+      
+      aside a:hover::before {
+        content: "";
+        position: absolute;
+        background-color: transparent;
+        top: 38px;
+        right: 0;
+        height: 35px;
+        width: 35px;
+        border-top-right-radius: 18px;
+        box-shadow: 0 -20px 0 0 #fff;
+      }
+      
+      aside p {
+        margin: 0;
+        padding: 40px 0;
+      }
+      
+      body {
+        font-family: 'Roboto';
+        width: 100%;
+        height: 100vh;
+        margin: 0;
+      }
+      
+      .social {
+        height: 0;  
+      }
+      
+      .social i:before {
+        width: 14px;
+        height: 14px;
+        font-size: 14px;
+        position: fixed;
+        color: #fff;
+        background: #0077B5;
+        padding: 10px;
+        border-radius: 50%;
+        top:5px;
+        right:5px;
+      }
+      
+      html {
+        font-family: sans-serif;
+        font-size: 15px;
+        line-height: 1.4;
+        color: #444;
+    }
+    
+   
+    
+    .wrapper {
+        margin: 15px auto;
+        max-width: 1100px;
+    }
+    
+    .container-calendar {
+        background: #ffffff;
+        padding: 56px;
+        max-width: 475px;
+        margin: 60px auto;
+        overflow: auto;
+    }
+    
+    .button-container-calendar button {
+        cursor: pointer;
+        display: inline-block;
+        zoom: 1;
+        background: #00a2b7;
+        color: #fff;
+        border: 1px solid #0aa2b5;
+        border-radius: 4px;
+        padding: 5px 10px;
+    }
+    
+    .table-calendar {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    .table-calendar td, .table-calendar th {
+        padding: 5px;
+        border: 1px solid #e2e2e2;
+        text-align: center;
+        vertical-align: top;
+    }
+    
+    .date-picker.selected {
+        font-weight: bold;
+        outline: 1px dashed #00BCD4;
+    }
+    
+    .date-picker.selected span {
+        border-bottom: 2px solid currentColor;
+    }
+    
+    /* sunday */
+    .date-picker:nth-child(1) {
+      color: red;
+    }
+    
+    /* friday */
+    .date-picker:nth-child(6) {
+      color: green;
+    }
+    
+    #monthAndYear {
+        text-align: center;
+        margin-top: 0;
+    }
+    
+    .button-container-calendar {
+        position: relative;
+        margin-bottom: 1em;
+        overflow: hidden;
+        clear: both;
+    }
+    
+    #previous {
+        float: left;
+    }
+    
+    #next {
+        float: right;
+    }
+    
+    .footer-container-calendar {
+        margin-top: 1em;
+        border-top: 1px solid #dadada;
+        padding: 10px 0;
+    }
+    
+    .footer-container-calendar select {
+        cursor: pointer;
+        display: inline-block;
+        zoom: 1;
+        background: #ffffff;
+        color: #585858;
+        border: 1px solid #bfc5c5;
+        border-radius: 3px;
+        padding: 5px 1em;
+    }
+      
+
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+body{
+	line-height: 1.5;
+	font-family: 'Poppins', sans-serif;
+}
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+}
+.container{
+	max-width: 1170px;
+	margin:auto;
+}
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+ul{
+	list-style: none;
+}
+.footer{
+	background-color: #24262b;
+    padding: 70px 0;
+    
+
+}
+.footer-col{
+   width: 25%;
+   padding: 0 15px;
+}
+.footer-col h4{
+	font-size: 18px;
+	color: #ffffff;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.footer-col h4::before{
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+	background-color: #3382c5;
+	height: 2px;
+	box-sizing: border-box;
+	width: 50px;
+}
+.footer-col ul li:not(:last-child){
+	margin-bottom: 10px;
+}
+.footer-col ul li a{
+	font-size: 16px;
+	text-transform: capitalize;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 300;
+	color: #bbbbbb;
+	display: block;
+	transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+	color: #ffffff;
+	padding-left: 8px;
+}
+.footer-col .social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background-color: rgba(255,255,255,0.2);
+	margin:0 10px 10px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: #ffffff;
+	transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover{
+	color: #24262b;
+	background-color: #ffffff;
+}
+
+/*responsive*/
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+}
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+}
+}
+
+
+
+
+</style>
+</head>
+<body>
+  <header>          
+    <nav class="menu">
+
+        <ul>
+          <div class="logo"><a href="#">isimm
+          </a></div>
+            <li>
+                <a href="#">Institut</a>
+                <ul class="submenu">
+                    <li>
+                        <a href="#">ISIMM</a>
+                        <ul >
+                            <li><a href="presentation.html">Présentation de l'ISIMM</a></li>
+                            <li>
+                                <a href="#">Équipe</a>
+                                <ul >
+                                    <li><a href="departement.html">Départements</a></li>
+                                    <li><a href="#">Conseil</a></li>
+                                    <li><a href="4C.html">Centre 4C</a></li>
+                                    <li><a href="#">Comité de Qualité</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Vie Étudiante</a>
+                                <ul >
+                                    <li><a href="foyer.html">Foyer</a></li>
+                                    <li><a href="restaux.html">Resto</a></li>
+                                    <li><a href="transport.html">Transport</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Vie Associative</a>
+                                <ul >
+                                    <li><a href="#">Associations</a></li>
+                                    <li><a href="clubs.html">Clubs</a></li>
+                                    <li><a href="#">Événements</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">International</a>
+                        <ul class="subsubmenu">
+                            <li><a href="#">Programme Mobilité</a></li>
+                            <li><a href="#">Stage à l'extérieur</a></li>
+                            <li><a href="#">Partenaire International</a></li>
+                            <li><a href="#">Consultation et Offres</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Formations</a>
+                <ul class="submenu">
+                    <li>
+                        <a href="#">Cycle Ingénieur</a>
+                        <ul class="subsubmenu">
+                            <li><a href="formation.html#c2">Informatique</a></li>
+                            <li><a href="formation.html#c1">Électronique et Microélectronique</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Master</a>
+                        <ul class="subsubmenu">
+                            <li>
+                                <a href="#">Master de Recherche</a>
+                                <ul class="subsubsubmenu">
+                                    <li><a href="formation.html#c8">Génie Logiciel</a></li>
+                                    <li><a href="formation.html#c9">Microélectronique et Instrumentation</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Master Professionnel</a>
+                                <ul class="subsubsubmenu">
+                                    <li><a href="formation.html#c10">Data Science</a></li>
+                                    <li><a href="formation.html#c11">Ingénierie en Instrumentation Industrielle</a></li>
+                                    <li><a href="formation.html#c12">Génie Logiciel</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Licence</a>
+                        <ul class="subsubmenu">
+                            <li><a href="formation.html#c3">EEA: SE</a></li>
+                            <li><a href="formation.html#c4">EEA: MIM</a></li>
+                            <li><a href="formation.html#c5">Mathématiques Appliquées</a></li>
+                            <li><a href="formation.html#c6">Sciences de l'Informatique</a></li>
+                            <li><a href="formation.html#c7">TIC</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="formation.html#c13">Cycle Préparatoire Intégré en Informatique</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Recherche</a>
+                <ul class="submenu">
+                    <li><a href="#">Laboratoire et Unité de Recherche</a></li>
+                    <li><a href="#">Projet de Recherche</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="">Entreprise</a>
+                <ul class="submenu">
+                    <li>
+                        <a href="#">Étudiant</a>
+                        <ul class="subsubmenu">
+                            <li><a href="#">Description de l'Entreprise</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Entreprise</a>
+                        <ul class="subsubmenu">
+                            <li><a href="#">Descriptions des Talents de l'ISIMM</a></li>
+                            <li><a href="partenaire.html">Devenir Partenaire</a></li>
+                            <li><a href="#">Offre de Stage</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Contactez Nous</a>
+                <ul class="submenu">
+                    <li><a href="#">Formulaire</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
+      
+      
+      <div id="slider">
+    <figure>
+      <img src="img1.png" alt="Image 1">
+      <img src="img2.jpeg" alt="Image 2">
+        <img src="img3.png" alt="Image 3">
+        <img src="img4.png" alt="Image 4">
+    </figure>
+   
+    
+</div>
+
+<div class="section">
+    <div class="content">
+        <h2>Accueil</h2>
+        <p>Bienvenue sur le site officiel de l’Institut Supérieur d’Informatique et de Mathématiques de Monastir (ISIMM).  Cette plateforme vous permet de découvrir les différentes formations assurées par l’ISIMM, la vie-estudiantine, l’entreprenariat avec le milieu socio-économique, … Par ailleurs, le tissu industriel peut intervenir par la proposition des stages et des emplois pour les étudiants et les diplômés de l’ISIMM. Nos étudiants participent bien au battement du cœur de notre établissement au rythme de la vie associative. La majorité des étudiants adhère à un club ou plus sur des sujets très divers mais plutôt trop liés aux formations assurées par l’ISIMM. Ceci est une très bonne occasion pour ouvrir des perspectives devant nos étudiants pour faire preuve d’initiatives dans le domaine qui leur est cher !
+
+            A travers cette plateforme, les enseignants et les étudiants ainsi que le staff administratif peuvent accéder à leurs comptes personnels à distance  afin de faciliter la communication entre eux.  En effet, ces comptes numériques offrent à tous les utilisateurs un système de messagerie de discussion, de partage de documents et de présentation des demandes administratifs. L’accès à la bibliothèque pour les enseignants et les étudiants est possible désormais à distance pour consulter les catalogues et même réserver.
+            
+            Visiter le site officiel de l’ISIMM par le public ou/et par les utilisateurs vous permet de vivre en temps réel au siège de l’établissement.</p>
+    </div>
+    <div class="map">
+        <!-- Your map embed code or image goes here -->
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12949.779576431984!2d10.8407374!3d35.7644464!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x130212d6df016097%3A0x528cc1e524eece77!2sHigher%20Institute%20of%20Informatics%20and%20Mathematics%20of%20Monastir!5e0!3m2!1sen!2stn!4v1707122732535!5m2!1sen!2stn" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        
+    </div>
+</div>
+
+<maindiv>
+    <aside>
+        <p style="padding-left:50px ;"> Liens Utiles </p>
+        <a href="javascript:void(0)">
+          <i class="fa fa-user-o" aria-hidden="true"></i>
+          ANCIENNE VERSION DU SITE
+        </a>
+        <a href="javascript:void(0)">
+            DIRECTION GÉNÉRALE DE LA RÉNOVATION UNIVERSITAIRE
+        </a>
+        <a href="javascript:void(0)">
+            OFFICE DES ŒUVRES UNIVERSITAIRES DU CENTRE
+        </a>
+        <a href="javascript:void(0)">
+            UNIVERSITÉ DE MONASTIR
+        </a>
+        <a href="javascript:void(0)">
+            MINSITÈRE DE L'ENSEIGNEMENT SUPÉRIEUR ET DE LA RECHERCHE SCIENTIFIQUE
+        </a>
+        <a href="javascript:void(0)">
+            CENTRE DE CALCUL ELKHAWARIZMI
+        </a>
+      </aside>
+      
+
+    </div>
+    
+    <div class="wrapper">
+
+      <div class="container-calendar">
+          <h3 id="monthAndYear"></h3>
+          
+          <div class="button-container-calendar">
+              <button id="previous" onclick="previous()">&#8249;</button>
+              <button id="next" onclick="next()">&#8250;</button>
+          </div>
+          
+          <table class="table-calendar" id="calendar" data-lang="en">
+              <thead id="thead-month"></thead>
+              <tbody id="calendar-body"></tbody>
+          </table>
+          
+          <div class="footer-container-calendar">
+               <label for="month">Jump To: </label>
+               <select id="month" onchange="jump()">
+                   <option value=0>Jan</option>
+                   <option value=1>Feb</option>
+                   <option value=2>Mar</option>
+                   <option value=3>Apr</option>
+                   <option value=4>May</option>
+                   <option value=5>Jun</option>
+                   <option value=6>Jul</option>
+                   <option value=7>Aug</option>
+                   <option value=8>Sep</option>
+                   <option value=9>Oct</option>
+                   <option value=10>Nov</option>
+                   <option value=11>Dec</option>
+               </select>
+               <select id="year" onchange="jump()"></select>       
+          </div>
+  
+      </div>
+      
+  </div>
+ 
+</maindiv>
+ <footer class="footer">
+  	 <div class="container">
+  	 	<div class="row">
+  	 		<div class="footer-col">
+  	 			<h4>Contactez-nous</h4>
+  	 			<ul>
+  	 				<li><a href="#">Décourvrir l'ISIMM - Formations - Formulaires en ligne - Offres d'emploi - Clubs
+
+                        Conception, réalisation : Start-up NACHD-IT, et M.Mohamed KHALFAOUI</a></li>
+  	 				
+  	 			</ul>
+  	 		</div>
+  	 		<div class="footer-col">
+  	 			<h4>Téléphone</h4>
+  	 			<ul>
+  	 				<li><a href="#">+216 70 011 920</a></li>
+  	 				
+  	 			</ul>
+  	 		</div>
+  	 		<div class="footer-col">
+  	 			<h4>Fax </h4>
+  	 			<ul>
+  	 				<li><a href="#">+216 70 011 959</a></li>
+  	 				
+  	 			</ul>
+  	 		</div>
+            
+  	 		<div class="footer-col">
+  	 			<h4>Avenue de la Corniche, Monastir 5000 Tunisie</h4>
+  	 			<div class="social-links">
+  	 				<a href="https://www.facebook.com/p/ISIMM-Institut-Sup%C3%A9rieur-dInformatique-et-de-Math%C3%A9matiques-de-Monastir-100063489403806/"><i class="fab fa-facebook-f"></i></a>
+  	 				<a href="https://twitter.com/_isimm?lang=en"><i class="fab fa-twitter"></i></a>
+  	 				<a href="https://www.instagram.com/explore/locations/105890621413094/isimm-institut-superieur-dinformatique-et-de-mathematiques-de-monastir/"><i class="fab fa-instagram"></i></a>
+  	 				<a href="https://www.linkedin.com/school/isimm/?originalSubdomain=tn"><i class="fab fa-linkedin-in"></i></a>
+  	 			</div>
+  	 		</div>
+  	 	</div>
+  	 </div>
+  </footer>
+
+  <script>
+    function generate_year_range(start, end) {
+    var years = "";
+    for (var year = start; year <= end; year++) {
+        years += "<option value='" + year + "'>" + year + "</option>";
+    }
+    return years;
+}
+
+today = new Date();
+currentMonth = today.getMonth();
+currentYear = today.getFullYear();
+selectYear = document.getElementById("year");
+selectMonth = document.getElementById("month");
+
+
+createYear = generate_year_range(1970, 2050);
+/** or
+ * createYear = generate_year_range( 1970, currentYear );
+ */
+
+document.getElementById("year").innerHTML = createYear;
+
+var calendar = document.getElementById("calendar");
+var lang = calendar.getAttribute('data-lang');
+
+var months = "";
+var days = "";
+
+var monthDefault = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+var dayDefault = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+if (lang == "en") {
+    months = monthDefault;
+    days = dayDefault;
+} else if (lang == "id") {
+    months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    days = ["Ming", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
+} else if (lang == "fr") {
+    months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+    days = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+} else {
+    months = monthDefault;
+    days = dayDefault;
+}
+
+
+var $dataHead = "<tr>";
+for (dhead in days) {
+    $dataHead += "<th data-days='" + days[dhead] + "'>" + days[dhead] + "</th>";
+}
+$dataHead += "</tr>";
+
+//alert($dataHead);
+document.getElementById("thead-month").innerHTML = $dataHead;
+
+
+monthAndYear = document.getElementById("monthAndYear");
+showCalendar(currentMonth, currentYear);
+
+
+
+function next() {
+    currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
+    currentMonth = (currentMonth + 1) % 12;
+    showCalendar(currentMonth, currentYear);
+}
+
+function previous() {
+    currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
+    currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
+    showCalendar(currentMonth, currentYear);
+}
+
+function jump() {
+    currentYear = parseInt(selectYear.value);
+    currentMonth = parseInt(selectMonth.value);
+    showCalendar(currentMonth, currentYear);
+}
+
+function showCalendar(month, year) {
+
+    var firstDay = ( new Date( year, month ) ).getDay();
+
+    tbl = document.getElementById("calendar-body");
+
+    
+    tbl.innerHTML = "";
+
+    
+    monthAndYear.innerHTML = months[month] + " " + year;
+    selectYear.value = year;
+    selectMonth.value = month;
+
+    // creating all cells
+    var date = 1;
+    for ( var i = 0; i < 6; i++ ) {
+        
+        var row = document.createElement("tr");
+
+        
+        for ( var j = 0; j < 7; j++ ) {
+            if ( i === 0 && j < firstDay ) {
+                cell = document.createElement( "td" );
+                cellText = document.createTextNode("");
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+            } else if (date > daysInMonth(month, year)) {
+                break;
+            } else {
+                cell = document.createElement("td");
+                cell.setAttribute("data-date", date);
+                cell.setAttribute("data-month", month + 1);
+                cell.setAttribute("data-year", year);
+                cell.setAttribute("data-month_name", months[month]);
+                cell.className = "date-picker";
+                cell.innerHTML = "<span>" + date + "</span>";
+
+                if ( date === today.getDate() && year === today.getFullYear() && month === today.getMonth() ) {
+                    cell.className = "date-picker selected";
+                }
+                row.appendChild(cell);
+                date++;
+            }
+
+
+        }
+
+        tbl.appendChild(row);
+    }
+
+}
+
+function daysInMonth(iMonth, iYear) {
+    return 32 - new Date(iYear, iMonth, 32).getDate();
+}
+  </script>
+</body>
+</html>

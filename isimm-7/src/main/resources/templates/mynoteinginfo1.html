@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Convert | Export html Table to CSV & EXCEL File</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+h1 {
+  color: #7e2422;
+  font-size: 40px;
+  font-weight: 600;
+  text-decoration: none;
+}
+@media print {
+ .table, .table__body {
+  overflow: visible;
+  height: auto !important;
+  width: auto !important;
+ }
+}
+
+/*@page {
+    size: landscape;
+    margin: 0; 
+}*/
+
+body {
+    min-height: 100vh;
+    background: url(images/html_table.jpg) center / cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main.table {
+    width: 90vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.075);
+
+    backdrop-filter: blur(7px);
+    box-shadow: 0 .4rem .8rem #0005;
+    border-radius: .8rem;
+
+    overflow: hidden;
+}
+
+.table__header {
+    width: 100%;
+    height: 5%;
+    background-color: rgba(255, 255, 255, 0.918);
+    padding: .8rem 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table__header .input-group {
+    width: 35%;
+    height: 100%;
+    background-color: #fff5;
+    padding: 0 .8rem;
+    border-radius: 2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: .2s;
+}
+
+.table__header .input-group:hover {
+    width: 45%;
+    background-color: #fff8;
+    box-shadow: 0 .1rem .4rem #0002;
+}
+
+.table__header .input-group img {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.table__header .input-group input {
+    width: 100%;
+    padding: 0 .5rem 0 .3rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.table__body {
+    width: 95%;
+    max-height: calc(89% - 1.6rem);
+    background-color: rgba(75, 121, 174, 0.251);
+
+    margin: .8rem auto;
+    border-radius: .6rem;
+
+    overflow: auto;
+    overflow: overlay;
+}
+
+
+.table__body::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.table__body::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+.table__body:hover::-webkit-scrollbar-thumb{ 
+    visibility: visible;
+}
+
+
+table {
+    width: 100%;
+}
+
+td img {
+    width: 36px;
+    height: 36px;
+    margin-right: .5rem;
+    border-radius: 50%;
+
+    vertical-align: middle;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    padding: 1rem;
+    text-align: left;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #4b4b62;
+    cursor: pointer;
+    text-transform: capitalize;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #0000000b;
+}
+
+tbody tr {
+    --delay: .1s;
+    transition: .5s ease-in-out var(--delay), background-color 0s;
+}
+
+tbody tr.hide {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+tbody tr:hover {
+    background-color: #fff6 !important;
+}
+
+tbody tr td,
+tbody tr td p,
+tbody tr td img {
+    transition: .2s ease-in-out;
+}
+
+tbody tr.hide td,
+tbody tr.hide td p {
+    padding: 0;
+    font: 0 / 0 sans-serif;
+    transition: .2s ease-in-out .5s;
+}
+
+tbody tr.hide td img {
+    width: 0;
+    height: 0;
+    transition: .2s ease-in-out .5s;
+}
+
+
+
+
+@media (max-width: 1000px) {
+    td:not(:first-of-type) {
+        min-width: 12.1rem;
+    }
+}
+
+thead th span.icon-arrow {
+    display: inline-block;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 50%;
+    border: 1.4px solid transparent;
+    
+    text-align: center;
+    font-size: 1rem;
+    
+    margin-left: .5rem;
+    transition: .2s ease-in-out;
+}
+
+thead th:hover span.icon-arrow{
+    border: 1.4px solid #f5f3f7;
+}
+
+thead th:hover {
+    color: #f4f2f6;
+}
+
+thead th.active span.icon-arrow{
+    background-color: #0d001b;
+    color: #fff;
+}
+
+thead th.asc span.icon-arrow{
+    transform: rotate(180deg);
+}
+
+thead th.active,tbody td.active {
+    color: #14001e;
+}
+
+.export__file {
+    position: relative;
+}
+
+.export__file .export__file-btn {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    background: rgba(180, 28, 28, 0.4) url(images/export.png) center / 80% no-repeat;
+    border-radius: 50%;
+    transition: .2s ease-in-out;
+}
+
+.export__file .export__file-btn:hover { 
+    background-color: #941c1c;
+    transform: scale(1.15);
+    cursor: pointer;
+}
+
+.export__file input {
+    display: none;
+}
+
+.export__file .export__file-options {
+    position: absolute;
+    right: 0;
+    
+    width: 12rem;
+    border-radius: .5rem;
+    overflow: hidden;
+    text-align: center;
+
+    opacity: 0;
+    transform: scale(.8);
+    transform-origin: top right;
+    
+    box-shadow: 0 .2rem .5rem #0004;
+    
+    transition: .2s;
+}
+
+.export__file input:checked + .export__file-options {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 100;
+}
+
+.export__file .export__file-options label{
+    display: block;
+    width: 100%;
+    padding: .6rem 0;
+    background-color: #f2f2f2;
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    transition: .2s ease-in-out;
+}
+
+.export__file .export__file-options label:first-of-type{
+    padding: 1rem 0;
+    background-color: #86e49d !important;
+}
+
+.export__file .export__file-options label:hover{
+    transform: scale(1.05);
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.export__file .export__file-options img{
+    width: 2rem;
+    height: auto;
+}
+.separator-row td {
+            border: none; /* Remove borders for the separator row */
+            padding: 0; /* Remove padding */
+        }
+        .separator {
+            border-top: 3px solid black; /* Add a top border for the separator line */
+            width: 100%; /* Make the separator full width */
+            margin: 0; /* Remove margin */
+        }
+        button {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    background-color: rgb(255, 255,255, 1);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.4s ease;
+    margin-bottom: 10px;
+}
+.sn{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+    </style>
+</head>
+
+<body>
+    <main class="table" id="customers_table">
+        <h1><center><u>Ingenieur Informatique 1</u></center></h1>
+        <section class="table__header">
+            <div class="input-group">
+                <input type="search" placeholder="Search Data...">
+            </div>
+            <div class="export__file">
+                <label for="export-file" class="export__file-btn" title="Export File"></label>
+                <input type="checkbox" id="export-file">
+                <div class="export__file-options">
+                    <label>Export As &nbsp; &#10140;</label>
+                    <label for="export-file" id="toPDF">PDF <img src="images/pdf.png" alt=""></label>
+                    <label for="export-file" id="toJSON">JSON <img src="images/json.png" alt=""></label>
+                    <label for="export-file" id="toCSV">CSV <img src="images/csv.png" alt=""></label>
+                    <label for="export-file" id="toEXCEL">EXCEL <img src="images/excel.png" alt=""></label>
+                </div>
+            </div>
+        </section>
+        <section class="table__body">
+            <form action="your_submission_url" method="post">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Matiere <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Oral <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Ds <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> TP <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Examen <span class="icon-arrow">&UpArrow;</span></th>
+                    </tr>
+                </thead>
+                <div th:if="${notes}">
+                
+<tbody>
+    <tr>
+        <td> Analyse de données </td>
+        <td>
+            <span th:if="${notes.AnalyseDataOral >= 0}" th:text="${notes.AnalyseDataOral}"></span>
+            <span th:unless="${notes.AnalyseDataOral >= 0}">-</span>
+        </td> 
+        <td>
+            <span th:if="${notes.AnalyseDataDS >= 0}" th:text="${notes.AnalyseDataDS}"></span>
+            <span th:unless="${notes.AnalyseDataDS >= 0}">-</span>
+        </td>
+        <td>
+            <span th:if="${notes.AnalyseDataTP >= 0}" th:text="${notes.AnalyseDataTP}"></span>
+            <span th:unless="${notes.AnalyseDataTP >= 0}">-</span>
+        </td>
+        <td>
+            <span th:if="${notes.AnalyseDataExam >= 0}" th:text="${notes.AnalyseDataExam}"></span>
+            <span th:unless="${notes.AnalyseDataExam >= 0}">-</span>
+        </td>
+    </tr>
+    <tr>
+    <td>Mathématiques des réseaux de neurones</td>
+    <td>
+        <span th:if="${notes.mathNeurOral >= 0}" th:text="${notes.mathNeurOral}"></span>
+        <span th:unless="${notes.mathNeurOral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.mathNeurDS >= 0}" th:text="${notes.mathNeurDS}"></span>
+        <span th:unless="${notes.mathNeurDS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.mathNeurTP >= 0}" th:text="${notes.mathNeurTP}"></span>
+        <span th:unless="${notes.mathNeurTP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.mathNeurExam >= 0}" th:text="${notes.mathNeurExam}"></span>
+        <span th:unless="${notes.mathNeurExam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Structures de données avancées en Python</td>
+    <td>
+        <span th:if="${notes.PythonOral >= 0}" th:text="${notes.PythonOral}"></span>
+        <span th:unless="${notes.PythonOral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.PythonDS >= 0}" th:text="${notes.PythonDS}"></span>
+        <span th:unless="${notes.PythonDS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.PythonTP >= 0}" th:text="${notes.PythonTP}"></span>
+        <span th:unless="${notes.PythonTP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.PythonExam >= 0}" th:text="${notes.PythonExam}"></span>
+        <span th:unless="${notes.PythonExam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Techniques de construction d’analyseurs lexico syntaxiques</td>
+    <td>
+        <span th:if="${notes.LexicoOral >= 0}" th:text="${notes.LexicoOral}"></span>
+        <span th:unless="${notes.LexicoOral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.LexicoDS >= 0}" th:text="${notes.LexicoDS}"></span>
+        <span th:unless="${notes.LexicoDS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.LexicoTP >= 0}" th:text="${notes.LexicoTP}"></span>
+        <span th:unless="${notes.LexicoTP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.LexicoExam >= 0}" th:text="${notes.LexicoExam}"></span>
+        <span th:unless="${notes.LexicoExam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Applications logicielles d'entreprise</td>
+<td>
+    <span th:if="${notes.JavaCardOral >=0}" th:text="${notes.JavaCardOral}"></span>
+    <span th:unless="${notes.JavaCardOral  >=0}">-</span>
+</td>
+<td>
+    <span th:if="${notes.JavaCardDS  >=0}" th:text="${notes.JavaCardDS}"></span>
+    <span th:unless="${notes.JavaCardDS  >=0}">-</span>
+</td>
+<td>
+    <span th:if="${notes.JavaCardTP  >=0}" th:text="${notes.JavaCardTP}"></span>
+    <span th:unless="${notes.JavaCardTP  >=0}">-</span>
+</td>
+<td>
+    <span th:if="${notes.JavaCardExam  >=0}" th:text="${notes.JavaCardExam}"></span>
+    <span th:unless="${notes.JavaCardExam  >=0}">-</span>
+</td>
+
+</tr>
+
+<tr>
+    <td>Modélisation UML/OCL</td>
+    <td>
+        <span th:if="${notes.UMLOral >= 0}" th:text="${notes.UMLOral}"></span>
+        <span th:unless="${notes.UMLOral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.UMLDS >= 0}" th:text="${notes.UMLDS}"></span>
+        <span th:unless="${notes.UMLDS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.UMLTP >= 0}" th:text="${notes.UMLTP}"></span>
+        <span th:unless="${notes.UMLTP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.UMLExam >= 0}" th:text="${notes.UMLExam}"></span>
+        <span th:unless="${notes.UMLExam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Programmation Web avancée</td>
+    <td>
+        <span th:if="${notes.ProgWebeOral >= 0}" th:text="${notes.ProgWebeOral}"></span>
+        <span th:unless="${notes.ProgWebeOral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.ProgWebDS >= 0}" th:text="${notes.ProgWebDS}"></span>
+        <span th:unless="${notes.ProgWebDS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.ProgWebTP >= 0}" th:text="${notes.ProgWebTP}"></span>
+        <span th:unless="${notes.ProgWebTP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.ProgWebExam >= 0}" th:text="${notes.ProgWebExam}"></span>
+        <span th:unless="${notes.ProgWebExam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Programmation mobile</td>
+    <td>
+        <span th:if="${notes.ProgmobileOral >= 0}" th:text="${notes.ProgmobileOral}"></span>
+        <span th:unless="${notes.ProgmobileOral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.ProgmobileDS >= 0}" th:text="${notes.ProgmobileDS}"></span>
+        <span th:unless="${notes.ProgmobileDS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.ProgmobileTP >= 0}" th:text="${notes.ProgmobileTP}"></span>
+        <span th:unless="${notes.ProgmobileTP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.ProgmobileExam >= 0}" th:text="${notes.ProgmobileExam}"></span>
+        <span th:unless="${notes.ProgmobileExam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Projet Web/mobile</td>
+    <td>
+        <span th:if="${notes.ProjetWebOral >= 0}" th:text="${notes.ProjetWebOral}"></span>
+        <span th:unless="${notes.ProjetWebOral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.ProjetWebDS >= 0}" th:text="${notes.ProjetWebDS}"></span>
+        <span th:unless="${notes.ProjetWebDS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.ProjetWebTP >= 0}" th:text="${notes.ProjetWebTP}"></span>
+        <span th:unless="${notes.ProjetWebTP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.ProjetWebExam >= 0}" th:text="${notes.ProjetWebExam}"></span>
+        <span th:unless="${notes.ProjetWebExam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Anglais certification 1</td>
+    <td>
+        <span th:if="${notes.English1Oral >= 0}" th:text="${notes.English1Oral}"></span>
+        <span th:unless="${notes.English1Oral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.English1DS >= 0}" th:text="${notes.English1DS}"></span>
+        <span th:unless="${notes.English1DS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.English1TP >= 0}" th:text="${notes.English1TP}"></span>
+        <span th:unless="${notes.English1TP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.English1Exam >= 0}" th:text="${notes.English1Exam}"></span>
+        <span th:unless="${notes.English1Exam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Français certification 1</td>
+    <td>
+        <span th:if="${notes.French1Oral >= 0}" th:text="${notes.French1Oral}"></span>
+        <span th:unless="${notes.French1Oral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.French1DS >= 0}" th:text="${notes.French1DS}"></span>
+        <span th:unless="${notes.French1DS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.French1TP >= 0}" th:text="${notes.French1TP}"></span>
+        <span th:unless="${notes.French1TP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.French1Exam >= 0}" th:text="${notes.French1Exam}"></span>
+        <span th:unless="${notes.French1Exam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Techniques de communication 1 : communication et connaissance du soi</td>
+    <td>
+        <span th:if="${notes.Communic1Oral >= 0}" th:text="${notes.Communic1Oral}"></span>
+        <span th:unless="${notes.Communic1Oral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.Communic1DS >= 0}" th:text="${notes.Communic1DS}"></span>
+        <span th:unless="${notes.Communic1DS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.Communic1TP >= 0}" th:text="${notes.Communic1TP}"></span>
+        <span th:unless="${notes.Communic1TP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.Communic1Exam >= 0}" th:text="${notes.Communic1Exam}"></span>
+        <span th:unless="${notes.Communic1Exam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr class="separator-row">
+    <td colspan="2"><hr class="separator"></td>
+</tr>
+
+<tr>
+    <td>Processus stochastique</td>
+    <td>
+        <span th:if="${notes.StochaOral >= 0}" th:text="${notes.StochaOral}"></span>
+        <span th:unless="${notes.StochaOral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.StochaDS >= 0}" th:text="${notes.StochaDS}"></span>
+        <span th:unless="${notes.StochaDS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.StochaTP >= 0}" th:text="${notes.StochaTP}"></span>
+        <span th:unless="${notes.StochaTP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.StochaExam >= 0}" th:text="${notes.StochaExam}"></span>
+        <span th:unless="${notes.StochaExam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Optimisation combinatoire</td>
+    <td>
+        <span th:if="${notes.OptimOral >= 0}" th:text="${notes.OptimOral}"></span>
+        <span th:unless="${notes.OptimOral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.OptimDS >= 0}" th:text="${notes.OptimDS}"></span>
+        <span th:unless="${notes.OptimDS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.OptimTP >= 0}" th:text="${notes.OptimTP}"></span>
+        <span th:unless="${notes.OptimTP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.OptimExam >= 0}" th:text="${notes.OptimExam}"></span>
+        <span th:unless="${notes.OptimExam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Conception et analyse d'algorithmes</td>
+    <td>
+        <span th:if="${notes.ConceptionOral >= 0}" th:text="${notes.ConceptionOral}"></span>
+        <span th:unless="${notes.ConceptionOral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.ConceptionDS >= 0}" th:text="${notes.ConceptionDS}"></span>
+        <span th:unless="${notes.ConceptionDS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.ConceptionTP >= 0}" th:text="${notes.ConceptionTP}"></span>
+        <span th:unless="${notes.ConceptionTP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.ConceptionExam >= 0}" th:text="${notes.ConceptionExam}"></span>
+        <span th:unless="${notes.ConceptionExam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Frama-C et la preuve de programmes</td>
+    <td>
+        <span th:if="${notes.FramaOral >= 0}" th:text="${notes.FramaOral}"></span>
+        <span th:unless="${notes.FramaOral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.FramaDS >= 0}" th:text="${notes.FramaDS}"></span>
+        <span th:unless="${notes.FramaDS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.FramaTP >= 0}" th:text="${notes.FramaTP}"></span>
+        <span th:unless="${notes.FramaTP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.FramaExam >= 0}" th:text="${notes.FramaExam}"></span>
+        <span th:unless="${notes.FramaExam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Projet SI</td>
+    <td>
+        <span th:if="${notes.ProjetSIOral >= 0}" th:text="${notes.ProjetSIOral}"></span>
+        <span th:unless="${notes.ProjetSIOral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.ProjetSIDS >= 0}" th:text="${notes.ProjetSIDS}"></span>
+        <span th:unless="${notes.ProjetSIDS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.ProjetSITP >= 0}" th:text="${notes.ProjetSITP}"></span>
+        <span th:unless="${notes.ProjetSITP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.ProjetSIExam >= 0}" th:text="${notes.ProjetSIExam}"></span>
+        <span th:unless="${notes.ProjetSIExam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Ingénierie et interopérabilité des systèmes informatiques</td>
+    <td>
+        <span th:if="${notes.SIOral >= 0}" th:text="${notes.SIOral}"></span>
+        <span th:unless="${notes.SIOral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.SIDS >= 0}" th:text="${notes.SIDS}"></span>
+        <span th:unless="${notes.SIDS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.SITP >= 0}" th:text="${notes.SITP}"></span>
+        <span th:unless="${notes.SITP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.SIExam >= 0}" th:text="${notes.SIExam}"></span>
+        <span th:unless="${notes.SIExam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Fondements de l’Intelligence Artificielle</td>
+    <td>
+        <span th:if="${notes.AIOral >= 0}" th:text="${notes.AIOral}"></span>
+        <span th:unless="${notes.AIOral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.AIDS >= 0}" th:text="${notes.AIDS}"></span>
+        <span th:unless="${notes.AIDS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.AITP >= 0}" th:text="${notes.AITP}"></span>
+        <span th:unless="${notes.AITP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.AIExam >= 0}" th:text="${notes.AIExam}"></span>
+        <span th:unless="${notes.AIExam >= 0}">-</span>
+    </td>
+</tr>
+<tr>
+    <td>Algorithmes d'apprentissage automatique</td>
+    <td>
+        <span th:if="${notes.MLOral >= 0}" th:text="${notes.MLOral}"></span>
+        <span th:unless="${notes.MLOral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.MLDS >= 0}" th:text="${notes.MLDS}"></span>
+        <span th:unless="${notes.MLDS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.MLTP >= 0}" th:text="${notes.MLTP}"></span>
+        <span th:unless="${notes.MLTP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.MLExam >= 0}" th:text="${notes.MLExam}"></span>
+        <span th:unless="${notes.MLExam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Français certification 2</td>
+    <td>
+        <span th:if="${notes.French2Oral >= 0}" th:text="${notes.French2Oral}"></span>
+        <span th:unless="${notes.French2Oral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.French2DS >= 0}" th:text="${notes.French2DS}"></span>
+        <span th:unless="${notes.French2DS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.French2TP >= 0}" th:text="${notes.French2TP}"></span>
+        <span th:unless="${notes.French2TP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.French2Exam >= 0}" th:text="${notes.French2Exam}"></span>
+        <span th:unless="${notes.French2Exam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Anglais certification 2</td>
+    <td>
+        <span th:if="${notes.English2Oral >= 0}" th:text="${notes.English2Oral}"></span>
+        <span th:unless="${notes.English2Oral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.English2DS >= 0}" th:text="${notes.English2DS}"></span>
+        <span th:unless="${notes.English2DS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.English2TP >= 0}" th:text="${notes.English2TP}"></span>
+        <span th:unless="${notes.English2TP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.English2Exam >= 0}" th:text="${notes.English2Exam}"></span>
+        <span th:unless="${notes.English2Exam >= 0}">-</span>
+    </td>
+</tr>
+
+<tr>
+    <td>Techniques de communication 2 : pitching</td>
+    <td>
+        <span th:if="${notes.Communic2Oral >= 0}" th:text="${notes.Communic2Oral}"></span>
+        <span th:unless="${notes.Communic2Oral >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.Communic2DS >= 0}" th:text="${notes.Communic2DS}"></span>
+        <span th:unless="${notes.Communic2DS >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.Communic2TP >= 0}" th:text="${notes.Communic2TP}"></span>
+        <span th:unless="${notes.Communic2TP >= 0}">-</span>
+    </td>
+    <td>
+        <span th:if="${notes.Communic2Exam >= 0}" th:text="${notes.Communic2Exam}"></span>
+        <span th:unless="${notes.Communic2Exam >= 0}">-</span>
+    </td>
+</tr>
+
+                </tbody></div>
+
+            </table>
+            <div class="sn">
+            <center><hr class="separator"></center>
+            <center><label for="generalNote">Moyenne Generale :</label>
+            <input type="text" id="generalNote" name="generalNote" readonly /></center>
+            </div>
+        </form>
+        </section>
+
+    </main>
+<script>
+    
+
+const search = document.querySelector('.input-group input'),
+    table_rows = document.querySelectorAll('tbody tr'),
+    table_headings = document.querySelectorAll('thead th');
+
+// 1. Searching for specific data of HTML table
+search.addEventListener('input', searchTable);
+
+function searchTable() {
+    table_rows.forEach((row, i) => {
+        let table_data = row.textContent.toLowerCase(),
+            search_data = search.value.toLowerCase();
+
+        row.classList.toggle('hide', table_data.indexOf(search_data) < 0);
+        row.style.setProperty('--delay', i / 25 + 's');
+    })
+
+    document.querySelectorAll('tbody tr:not(.hide)').forEach((visible_row, i) => {
+        visible_row.style.backgroundColor = (i % 2 == 0) ? 'transparent' : '#0000000b';
+    });
+}
+
+// 2. Sorting | Ordering data of HTML table
+
+table_headings.forEach((head, i) => {
+    let sort_asc = true;
+    head.onclick = () => {
+        table_headings.forEach(head => head.classList.remove('active'));
+        head.classList.add('active');
+
+        document.querySelectorAll('td').forEach(td => td.classList.remove('active'));
+        table_rows.forEach(row => {
+            row.querySelectorAll('td')[i].classList.add('active');
+        })
+
+        head.classList.toggle('asc', sort_asc);
+        sort_asc = head.classList.contains('asc') ? false : true;
+
+        sortTable(i, sort_asc);
+    }
+})
+
+
+function sortTable(column, sort_asc) {
+    [...table_rows].sort((a, b) => {
+        let first_row = a.querySelectorAll('td')[column].textContent.toLowerCase(),
+            second_row = b.querySelectorAll('td')[column].textContent.toLowerCase();
+
+        return sort_asc ? (first_row < second_row ? 1 : -1) : (first_row < second_row ? -1 : 1);
+    })
+        .map(sorted_row => document.querySelector('tbody').appendChild(sorted_row));
+}
+
+// 3. Converting HTML table to PDF
+
+const pdf_btn = document.querySelector('#toPDF');
+const customers_table = document.querySelector('#customers_table');
+
+
+const toPDF = function (customers_table) {
+    const html_code = `
+    <!DOCTYPE html>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <main class="table" id="customers_table">${customers_table.innerHTML}</main>`;
+
+    const new_window = window.open();
+     new_window.document.write(html_code);
+
+    setTimeout(() => {
+        new_window.print();
+        new_window.close();
+    }, 400);
+}
+
+pdf_btn.onclick = () => {
+    toPDF(customers_table);
+}
+
+// 4. Converting HTML table to JSON
+
+const json_btn = document.querySelector('#toJSON');
+
+const toJSON = function (table) {
+    let table_data = [],
+        t_head = [],
+
+        t_headings = table.querySelectorAll('th'),
+        t_rows = table.querySelectorAll('tbody tr');
+
+    for (let t_heading of t_headings) {
+        let actual_head = t_heading.textContent.trim().split(' ');
+
+        t_head.push(actual_head.splice(0, actual_head.length - 1).join(' ').toLowerCase());
+    }
+
+    t_rows.forEach(row => {
+        const row_object = {},
+            t_cells = row.querySelectorAll('td');
+
+        t_cells.forEach((t_cell, cell_index) => {
+            const img = t_cell.querySelector('img');
+            if (img) {
+                row_object['customer image'] = decodeURIComponent(img.src);
+            }
+            row_object[t_head[cell_index]] = t_cell.textContent.trim();
+        })
+        table_data.push(row_object);
+    })
+
+    return JSON.stringify(table_data, null, 4);
+}
+
+json_btn.onclick = () => {
+    const json = toJSON(customers_table);
+    downloadFile(json, 'json')
+}
+
+// 5. Converting HTML table to CSV File
+
+const csv_btn = document.querySelector('#toCSV');
+
+const toCSV = function (table) {
+    // Code For SIMPLE TABLE
+    // const t_rows = table.querySelectorAll('tr');
+    // return [...t_rows].map(row => {
+    //     const cells = row.querySelectorAll('th, td');
+    //     return [...cells].map(cell => cell.textContent.trim()).join(',');
+    // }).join('\n');
+
+    const t_heads = table.querySelectorAll('th'),
+        tbody_rows = table.querySelectorAll('tbody tr');
+
+    const headings = [...t_heads].map(head => {
+        let actual_head = head.textContent.trim().split(' ');
+        return actual_head.splice(0, actual_head.length - 1).join(' ').toLowerCase();
+    }).join(',') + ',' + 'image name';
+
+    const table_data = [...tbody_rows].map(row => {
+        const cells = row.querySelectorAll('td'),
+            img = decodeURIComponent(row.querySelector('img').src),
+            data_without_img = [...cells].map(cell => cell.textContent.replace(/,/g, ".").trim()).join(',');
+
+        return data_without_img + ',' + img;
+    }).join('\n');
+
+    return headings + '\n' + table_data;
+}
+
+csv_btn.onclick = () => {
+    const csv = toCSV(customers_table);
+    downloadFile(csv, 'csv', 'customer orders');
+}
+
+// 6. Converting HTML table to EXCEL File
+
+const excel_btn = document.querySelector('#toEXCEL');
+
+const toExcel = function (table) {
+    // Code For SIMPLE TABLE
+    // const t_rows = table.querySelectorAll('tr');
+    // return [...t_rows].map(row => {
+    //     const cells = row.querySelectorAll('th, td');
+    //     return [...cells].map(cell => cell.textContent.trim()).join('\t');
+    // }).join('\n');
+
+    const t_heads = table.querySelectorAll('th'),
+        tbody_rows = table.querySelectorAll('tbody tr');
+
+    const headings = [...t_heads].map(head => {
+        let actual_head = head.textContent.trim().split(' ');
+        return actual_head.splice(0, actual_head.length - 1).join(' ').toLowerCase();
+    }).join('\t') + '\t' + 'image name';
+
+    const table_data = [...tbody_rows].map(row => {
+        const cells = row.querySelectorAll('td'),
+            img = decodeURIComponent(row.querySelector('img').src),
+            data_without_img = [...cells].map(cell => cell.textContent.trim()).join('\t');
+
+        return data_without_img + '\t' + img;
+    }).join('\n');
+
+    return headings + '\n' + table_data;
+}
+
+excel_btn.onclick = () => {
+    const excel = toExcel(customers_table);
+    downloadFile(excel, 'excel');
+}
+
+const downloadFile = function (data, fileType, fileName = '') {
+    const a = document.createElement('a');
+    a.download = fileName;
+    const mime_types = {
+        'json': 'application/json',
+        'csv': 'text/csv',
+        'excel': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    }
+    a.href = `
+        data:${mime_types[fileType]};charset=utf-8,${encodeURIComponent(data)}
+    `;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+}
+
+</script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

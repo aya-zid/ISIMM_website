@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Les actualités</title>
+<style>
+h2{
+    text-align: center;
+    font-size: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    padding: 30px 0;
+}
+	html,
+body {
+	height: 100%;
+}
+a {
+  text-decoration: none;
+}
+a {
+  text-decoration: none;
+  color: rgb(255, 255, 255); /* This is a blue color similar to the default, adjust as needed */
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: rgb(255, 255, 255); /* Darker blue on hover */
+  background-color: rgb(128, 0, 255); /* Light gray background on hover */
+  font-weight: bold; /* Increase font weight on hover */
+}
+
+body {
+	margin: 0;
+	background: linear-gradient(45deg, #49a09d, #5f2c82);
+	font-family: sans-serif;
+	font-weight: 100;
+}
+
+.container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+table {
+	width: 800px;
+	border-collapse: collapse;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+th,
+td {
+	padding: 15px;
+	background-color: rgba(255,255,255,0.2);
+	color: #fff;
+}
+
+th {
+	text-align: left;
+}
+
+thead {
+	th {
+		background-color: #55608f;
+	}
+}
+
+tbody {
+	tr {
+		&:hover {
+			background-color: rgba(255,255,255,0.3);
+		}
+	}
+	td {
+		position: relative;
+		&:hover {
+			&:before {
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: -9999px;
+				bottom: -9999px;
+				background-color: rgba(255,255,255,0.2);
+				z-index: -1;
+			}
+		}
+	}
+}
+	</style>
+</head>
+<body>
+    <h2><center>les actualités</center></h2>
+    <div class="container">
+    <table>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Lien drive</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="actualite : ${actualites}">
+                <td th:text="${actualite.titre}"></td>
+                 <td><a th:href="${actualite.liendrive}" th:text="${actualite.liendrive}"></a></td>
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                 <td><a onclick="return confirm ('etes vous sure de vouloir supprimer?')" 
+		       th:href="@{deleteActualite(id=${actualite.id})}">Delete</a></td>
+	             <td><a th:href="@{editActualite(id=${actualite.id})}">Edit</a></td>
+                </div>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymeLeaf.org"
+  xmlns:sec="https://wwww.thymeLeaf.org/thymeLeaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website</title>
+ <link rel="stylesheet" href="nadine project.css">
+ <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+  body {
+background-color: #333;
+  background-image: url("stud.gif");
+  background-repeat: no-repeat;
+  background-position: center ;
+  background-size: contain;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.logo a span{
+  color: #f2f2f2;
+  font-size: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-right: 700px;
+  margin-left: 30px;
+  
+}
+.menu ul {
+    list-style: none;
+    display: flex;
+}
+
+.menu ul li:not(:last-child) {
+    position: relative;
+    border-right: 1px solid #fff;    
+    padding-right: 25px; 
+    padding-left: 15px;
+}
+
+.menu ul li a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+}
+
+.menu ul li:hover > a {
+    background-color: #555;
+}
+
+/* Submenu styles */
+.menu ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #444;
+    z-index: 1000;
+}
+
+.menu ul ul ul {
+    top: 0;
+    left: 100%;
+    min-width: 200px;
+}
+
+.menu ul li:hover > ul {
+    display: block;border-right: 1px solid #fff;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+.body-text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  padding: 0 30px;
+}
+.body-text div{
+  font-size: 45px;
+  font-weight: 600;
+}
+@keyframes slidy {
+    0% { left: 0%; }
+    20% { left: 0%; }
+    25% { left: -100%; }
+    45% { left: -100%; }
+    50% { left: -200%; }
+    70% { left: -200%; }
+    75% { left: -300%; }
+    95% { left: -300%; }
+    100% { left: -400%; }
+    }
+    
+    body { margin: 0; } 
+    div#slider { overflow: hidden; }
+    div#slider figure img { width: 20%; float: left; }
+    div#slider figure { 
+      position: relative;
+      width: 500%;
+      margin: 0;
+      left: 0;
+      text-align: left;
+      font-size: 0;
+      animation: 30s slidy infinite; 
+    }
+    .section {
+        display: flex;
+        align-items: flex-start;
+        padding-top: 70px;
+        background-color: #333333;
+        padding-bottom: 47px
+    }
+    
+    .content {
+        flex: 1;
+        padding-right: 98px;
+        color: white;
+        margin-top: -19px
+    }
+    
+    h2 {
+        margin-bottom: 10px;
+       padding-left: 25px;
+    }
+    p{
+padding-left: 26px;
+    }
+    .map {
+        flex: 1;
+    }
+        
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      
+      maindiv{
+        display: flex;
+        background-color: #f2f2f2;
+       
+      }
+      
+      aside {
+        color: #fff;
+        width: 250px;
+        padding-left: 20px;
+        height: 100vh;
+        background-image: linear-gradient(30deg , #0048bd, #44a7fd);
+        border-top-right-radius: 80px;
+        margin-top: 1px
+      }
+      
+      aside a {
+        font-size: 12px;
+        color: #fff;
+        display: block;
+        padding: 12px;
+        padding-left: 30px;
+        text-decoration: none;
+        -webkit-tap-highlight-color:transparent;
+      }
+      
+      aside a:hover {
+        color: #3f5efb;
+        background: #fff;
+        outline: none;
+        position: relative;
+        background-color: #fff;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+      }
+      
+      aside a i {
+        margin-right: 5px;
+      }
+      
+      aside a:hover::after {
+        content: "";
+        position: absolute;
+        background-color: transparent;
+        bottom: 100%;
+        right: 0;
+        height: 35px;
+        width: 35px;
+        border-bottom-right-radius: 18px;
+        box-shadow: 0 20px 0 0 #fff;
+      }
+      
+      aside a:hover::before {
+        content: "";
+        position: absolute;
+        background-color: transparent;
+        top: 38px;
+        right: 0;
+        height: 35px;
+        width: 35px;
+        border-top-right-radius: 18px;
+        box-shadow: 0 -20px 0 0 #fff;
+      }
+      
+      aside p {
+        margin: 0;
+        padding: 40px 0;
+      }
+      
+      body {
+        font-family: 'Roboto';
+        width: 100%;
+        height: 100vh;
+        margin: 0;
+      }
+      
+      .social {
+        height: 0;  
+      }
+      
+      .social i:before {
+        width: 14px;
+        height: 14px;
+        font-size: 14px;
+        position: fixed;
+        color: #fff;
+        background: #0077B5;
+        padding: 10px;
+        border-radius: 50%;
+        top:5px;
+        right:5px;
+      }
+      
+      html {
+        font-family: sans-serif;
+        font-size: 15px;
+        line-height: 1.4;
+        color: #444;
+    }
+    
+   
+    
+    .wrapper {
+        margin: 15px auto;
+        max-width: 1100px;
+    }
+    
+
+
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+body{
+	line-height: 1.5;
+	font-family: 'Poppins', sans-serif;
+}
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+}
+.container{
+	max-width: 1170px;
+	margin:auto;
+}
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+ul{
+	list-style: none;
+}
+
+
+/*responsive*/
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+}
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+}
+}
+
+
+
+
+</style>
+</head>
+<body>
+  <header>          
+    <nav class="menu">
+
+        <ul>
+          <div class="logo"><a href="#"><span sec:authentication="name"></span></a></div>
+            <li>
+                <a th:href="@{profile}"><center>voir mon profil</center></a>
+            </li>
+            <li>
+                <a th:href="@{emploidetemps}" ><center>voir l'emploi de temps</center></a>
+            </li>
+            <li>
+                <a th:href="@{mesnotes}" ><center>voir mes notes</center></a>
+            </li>
+             <li>
+                <a th:href="@{actualites}"><center>voir les actualités</center></a>
+            </li>
+            <li>
+                <a th:href="@{/logout}"><center>logout</center></a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+</body>
+</html>

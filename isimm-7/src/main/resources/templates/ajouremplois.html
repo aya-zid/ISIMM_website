@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymeLeaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<style>/* Reset default browser styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    /* Apply some basic styles to the form */
+    form {
+      margin: 20px auto;
+      width: 80%;
+      max-width: 600px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    
+    /* Style the form elements */
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    
+    select,
+    button {
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 20px;
+      margin-right: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      font-size: 16px;
+    }
+    
+    button {
+      background-color: #9333bc;
+      color: white;
+      cursor: pointer;
+      margin-right: 100px;
+    }
+    
+    button:hover {
+      background-color: #93286c;
+    }
+    
+    /* Style the form container */
+    .div-form {
+      margin-bottom: 20px;
+    }
+    
+    /* Style the form container's header */
+    .div-form h2 {
+      margin-bottom: 10px;
+    }
+    
+    /* Responsive styling for smaller screens */
+    @media screen and (max-width: 600px) {
+      form {
+        width: 95%;
+      }
+    }
+    </style>
+</head>
+<body>
+<form method="post" th:action="@{addemploi}">
+				<div >
+					<label>cycle</label>
+					<select id="cycle" name="key1">
+    <option value="Ingénieurs" th:selected="${key1 == 'Ingénieurs'}">Ingénieurs</option>
+    <option value="Licence" th:selected="${key1 == 'Licence'}">Licence</option>
+    <option value="Mastère de recherche" th:selected="${key1 == 'Mastère de recherche'}">Mastère de recherche</option>
+    <option value="Mastère professionnel" th:selected="${key1 == 'Mastère professionnel'}">Mastère professionnel</option>
+    <option value="Preparatoire intégrée" th:selected="${key1 == 'Preparatoire intégrée'}">Preparatoire intégrée</option>
+</select>
+ 
+ <label for="specialite">Specialité:</label>
+              <select id="specialite" name="key2">
+                <option value="ingénieur électronique et microélectronique">ingénieur électronique et microélectronique</option>
+                <option value="ingénieur informatique">ingénieur informatique</option>
+                <option value="licence EEA : systèmes embarqués">licence EEA : systèmes embarqués</option>
+                <option value="licence EEA : mesure instrumentation et métrologie">licence EEA : mesure instrumentation et métrologie</option>
+                <option value="licence en mathematiques appliquées">licence en mathematiques appliquées</option>
+                <option value="licence en sciences de l'informatique">licence en sciences de l'informatique</option>
+                <option value="licence TIC : réseaux et IOT">licence TIC : réseaux et IOT</option>
+                <option value="mastère de recherche : génie logiciel">mastère de recherche : génie logiciel</option>
+                <option value="mastère de recherche : microélectronique et instrumentation">mastère de recherche : microélectronique et instrumentation</option>
+                <option value="mastère professionel: data science">mastère professionel: data science</option>
+                <option value="mastère professionel: génie logiciel">mastère professionel: génie logiciel</option>
+                <option value="mastère professionel: ingénierie en instrumentation industrielle">mastère professionel: ingénierie en instrumentation industrielle</option>
+                <option value="préparatoire en informatique">préparatoire en informatique</option>
+            </select>
+			<label for="niveauEtude" >Niveau d'Etude:</label>
+            <select id="niveauEtude" name="key3">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            
+					<button type="submit">Chercher</button>
+				</div>
+			</form>
+</body>
+</html>

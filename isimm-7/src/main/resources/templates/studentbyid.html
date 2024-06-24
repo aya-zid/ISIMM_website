@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <meta charset="UTF-8">
+    <title>Rechercher un étudiant par CIN</title>
+    <style> @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color:#a0d2eb;
+            margin: 20px;
+        }
+
+        h2 {
+            align-items: center;
+            color: rgba(0, 0, 0, 0.879);
+            font-size: 40px;
+            font-weight: 800;
+            border: 3px solid purple; /* Border color */
+            padding: 10px; /* Padding around the title */
+            border-radius: 8px;
+            text-shadow: 4px 4px 8px white;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input {
+            padding: 8px;
+            width: 300px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #8458B3;
+            color: white;
+            border: none;
+            cursor: pointer;font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+           
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 2px solid black;
+        }
+
+        th {
+            background-color: #8458B3;
+            color: white;
+        }
+
+        div {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+    </style>
+</head>
+<body>
+    <center><h2>Rechercher un étudiant par CIN</h2></center>
+    <form  method="get" th:action="@{/searchStudent}" >
+        <label >Entrez l'identifiant de l'étudiant (CIN) : </label>
+        <input type="text" id="id" name="mc" >
+        <button >Rechercher</button>
+    </form>
+
+    <!-- Afficher les informations sur l'étudiant s'il est trouvé -->
+    <div th:if="${foundStudent}">
+        <h3>Informations sur l'étudiant</h3>
+        <table>
+            <tr>
+                <th>Attribut</th>
+                <th>Valeur</th>
+            </tr>
+            <tr>
+                <td>CIN</td>
+                <td th:text="${foundStudent.CIN}"></td>
+            </tr>
+            <tr>
+                <td>Nom</td>
+                <td th:text="${foundStudent.nom}"></td>
+            </tr>
+            <tr>
+                <td>Prénom</td>
+                <td th:text="${foundStudent.prenom}"></td>
+            </tr>
+            <tr>
+                <td>Date de naissance</td>
+                <td th:text="${foundStudent.naissance}"></td>
+            </tr>
+            <tr>
+                <td>Sexe</td>
+                <td th:text="${foundStudent.sexe}"></td>
+            </tr>
+
+            <tr>
+                <td>Nationalité </td>
+                <td th:text="${foundStudent.nationalite}"></td>
+            </tr>
+            <tr>
+                <td>État civil</td>
+                <td th:text="${foundStudent.etatcivil}"></td>
+            </tr>
+            <tr>
+                <td>Adresse</td>
+                <td th:text="${foundStudent.adresse}"></td>
+            </tr>
+            <tr>
+                <td>Numéro de téléphone</td>
+                <td th:text="${foundStudent.numtel}"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td th:text="${foundStudent.email}"></td>
+            </tr>
+
+            <tr>
+                <td>Cycle</td>
+                <td th:text="${foundStudent.cycle}"></td>
+            </tr>
+            <tr>
+                <td>Spécialité</td>
+                <td th:text="${foundStudent.specialite}"></td>
+            </tr>
+            <tr>
+                <td>Niveau d'étude</td>
+                <td th:text="${foundStudent.niveauEtude}"></td>
+            </tr>
+            <tr>
+                <td>Groupe TD</td>
+                <td th:text="${foundStudent.groupeTD}"></td>
+            </tr>
+            <tr>
+                <td>Groupe TP</td>
+                <td th:text="${foundStudent.groupeTP}"></td>
+            </tr>
+
+            <tr>
+                <td>Situation</td>
+                <td th:text="${foundStudent.Situation}"></td>
+            </tr>
+            <tr>
+                <td>Établissement précédent</td>
+                <td th:text="${foundStudent.EtablissementPrecedent}"></td>
+            </tr>
+            <tr>
+                <td>Année du baccalauréat</td>
+                <td th:text="${foundStudent.annebac}"></td>
+            </tr>
+            <tr>
+                <td>Section du baccalauréat</td>
+                <td th:text="${foundStudent.sectionbac}"></td>
+            </tr>
+            <tr>
+                <td>Session du baccalauréat</td>
+                <td th:text="${foundStudent.sessionbac}"></td>
+            </tr>
+
+            <tr>
+                <td>Mention du baccalauréat</td>
+                <td th:text="${foundStudent.mentionbac}"></td>
+            </tr>
+            <tr>
+                <td>Moyenne du baccalauréat</td>
+                <td th:text="${foundStudent.moybac}"></td>
+            </tr>
+            <tr>
+                <td>Pays du baccalauréat</td>
+                <td th:text="${foundStudent.paysbac}"></td>
+            </tr>
+            <tr>
+                <td>Nom du père</td>
+                <td th:text="${foundStudent.nompere}"></td>
+            </tr>
+            <tr>
+                <td>Prénom du père</td>
+                <td th:text="${foundStudent.prenompere}"></td>
+            </tr>
+
+            <tr>
+                <td>Nom de la mère</td>
+                <td th:text="${foundStudent.nommere}"></td>
+            </tr>
+            <tr>
+                <td>Prénom de la mère</td>
+                <td th:text="${foundStudent.prenommere}"></td>
+            </tr>
+            <tr>
+                <td>Adresse des parents</td>
+                <td th:text="${foundStudent.addresseparent}"></td>
+            </tr>
+            <tr>
+                <td>Numéro de téléphone des parents</td>
+                <td th:text="${foundStudent.numtelparent}"></td>
+            </tr>
+
+        </table>
+    </div>
+</body>
+</html>

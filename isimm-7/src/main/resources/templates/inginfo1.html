@@ -1,0 +1,783 @@
+<<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Convert | Export html Table to CSV & EXCEL File</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+h1 {
+  color: #7e2422;
+  font-size: 40px;
+  font-weight: 600;
+  text-decoration: none;
+}
+@media print {
+ .table, .table__body {
+  overflow: visible;
+  height: auto !important;
+  width: auto !important;
+ }
+}
+
+/*@page {
+    size: landscape;
+    margin: 0; 
+}*/
+
+body {
+    min-height: 100vh;
+    background: url(images/html_table.jpg) center / cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main.table {
+    width: 90vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.075);
+
+    backdrop-filter: blur(7px);
+    box-shadow: 0 .4rem .8rem #0005;
+    border-radius: .8rem;
+
+    overflow: hidden;
+}
+
+.table__header {
+    width: 100%;
+    height: 5%;
+    background-color: rgba(255, 255, 255, 0.918);
+    padding: .8rem 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table__header .input-group {
+    width: 35%;
+    height: 100%;
+    background-color: #fff5;
+    padding: 0 .8rem;
+    border-radius: 2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: .2s;
+}
+
+.table__header .input-group:hover {
+    width: 45%;
+    background-color: #fff8;
+    box-shadow: 0 .1rem .4rem #0002;
+}
+
+.table__header .input-group img {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.table__header .input-group input {
+    width: 100%;
+    padding: 0 .5rem 0 .3rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.table__body {
+    width: 95%;
+    max-height: calc(89% - 1.6rem);
+    background-color: rgba(75, 121, 174, 0.251);
+
+    margin: .8rem auto;
+    border-radius: .6rem;
+
+    overflow: auto;
+    overflow: overlay;
+}
+
+
+.table__body::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.table__body::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+.table__body:hover::-webkit-scrollbar-thumb{ 
+    visibility: visible;
+}
+
+
+table {
+    width: 100%;
+}
+
+td img {
+    width: 36px;
+    height: 36px;
+    margin-right: .5rem;
+    border-radius: 50%;
+
+    vertical-align: middle;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    padding: 1rem;
+    text-align: left;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #4b4b62;
+    cursor: pointer;
+    text-transform: capitalize;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #0000000b;
+}
+
+tbody tr {
+    --delay: .1s;
+    transition: .5s ease-in-out var(--delay), background-color 0s;
+}
+
+tbody tr.hide {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+tbody tr:hover {
+    background-color: #fff6 !important;
+}
+
+tbody tr td,
+tbody tr td p,
+tbody tr td img {
+    transition: .2s ease-in-out;
+}
+
+tbody tr.hide td,
+tbody tr.hide td p {
+    padding: 0;
+    font: 0 / 0 sans-serif;
+    transition: .2s ease-in-out .5s;
+}
+
+tbody tr.hide td img {
+    width: 0;
+    height: 0;
+    transition: .2s ease-in-out .5s;
+}
+
+
+
+
+@media (max-width: 1000px) {
+    td:not(:first-of-type) {
+        min-width: 12.1rem;
+    }
+}
+
+thead th span.icon-arrow {
+    display: inline-block;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 50%;
+    border: 1.4px solid transparent;
+    
+    text-align: center;
+    font-size: 1rem;
+    
+    margin-left: .5rem;
+    transition: .2s ease-in-out;
+}
+
+thead th:hover span.icon-arrow{
+    border: 1.4px solid #f5f3f7;
+}
+
+thead th:hover {
+    color: #f4f2f6;
+}
+
+thead th.active span.icon-arrow{
+    background-color: #0d001b;
+    color: #fff;
+}
+
+thead th.asc span.icon-arrow{
+    transform: rotate(180deg);
+}
+
+thead th.active,tbody td.active {
+    color: #14001e;
+}
+
+.export__file {
+    position: relative;
+}
+
+.export__file .export__file-btn {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    background: rgba(180, 28, 28, 0.4) url(images/export.png) center / 80% no-repeat;
+    border-radius: 50%;
+    transition: .2s ease-in-out;
+}
+
+.export__file .export__file-btn:hover { 
+    background-color: #941c1c;
+    transform: scale(1.15);
+    cursor: pointer;
+}
+
+.export__file input {
+    display: none;
+}
+
+.export__file .export__file-options {
+    position: absolute;
+    right: 0;
+    
+    width: 12rem;
+    border-radius: .5rem;
+    overflow: hidden;
+    text-align: center;
+
+    opacity: 0;
+    transform: scale(.8);
+    transform-origin: top right;
+    
+    box-shadow: 0 .2rem .5rem #0004;
+    
+    transition: .2s;
+}
+
+.export__file input:checked + .export__file-options {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 100;
+}
+
+.export__file .export__file-options label{
+    display: block;
+    width: 100%;
+    padding: .6rem 0;
+    background-color: #f2f2f2;
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    transition: .2s ease-in-out;
+}
+
+.export__file .export__file-options label:first-of-type{
+    padding: 1rem 0;
+    background-color: #86e49d !important;
+}
+
+.export__file .export__file-options label:hover{
+    transform: scale(1.05);
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.export__file .export__file-options img{
+    width: 2rem;
+    height: auto;
+}
+.separator-row td {
+            border: none; /* Remove borders for the separator row */
+            padding: 0; /* Remove padding */
+        }
+        .separator {
+            border-top: 3px solid black; /* Add a top border for the separator line */
+            width: 100%; /* Make the separator full width */
+            margin: 0; /* Remove margin */
+        }
+        button {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    background-color: rgb(255, 255,255, 1);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.4s ease;
+    margin-bottom: 10px;
+}
+.sn{
+    margin-bottom: 10px;
+}
+    </style>
+</head>
+
+<body>
+    <main class="table" id="customers_table">
+        <h1><center><u>Ingenieur Informatique 1</u></center></h1>
+        <form method="post" th:action="@{/inginfo1notes}">
+        <section class="table__header">
+            <div >
+            <label>Student's CIN : </label>   <input type="text" placeholder="CIN" id="CIN" name="CIN">
+             <div th:if="${errorMessage}" style="color: red;">[[${errorMessage}]]</div>
+
+            </div>
+            <div class="export__file">
+                <label for="export-file" class="export__file-btn" title="Export File"></label>
+                <input type="checkbox" id="export-file">
+                <div class="export__file-options">
+                    <label>Export As &nbsp; &#10140;</label>
+                    <label for="export-file" id="toPDF">PDF <img src="images/pdf.png" alt=""></label>
+                    <label for="export-file" id="toJSON">JSON <img src="images/json.png" alt=""></label>
+                    <label for="export-file" id="toCSV">CSV <img src="images/csv.png" alt=""></label>
+                    <label for="export-file" id="toEXCEL">EXCEL <img src="images/excel.png" alt=""></label>
+                </div>
+            </div>
+        </section>
+        <section class="table__body">
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th> Matiere <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Oral <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Ds <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> TP <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Examen <span class="icon-arrow">&UpArrow;</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> Analyse de données </td>
+                        <td> <input type="text" id="anadonor" name="anadonor" ></td>
+                        <td> <input type="text" id="anadonds" name="anadonds"></td>
+                        <td> <input type="text" id="anadontp" name="anadontp"></td>
+                        <td><input type="text"  id="anadonex" name="anadonex"></td>
+                    </tr>
+                    <tr>
+                        <td> Mathématiques des réseaux de neurones </td>
+                        <td> <input type="text" id="neuronor" name="neuronor" ></td>
+                        <td> <input type="text" id="neuronds" name="neuronds"></td>
+                        <td> <input type="text" id="neurontp" name="neurontp"></td>
+                        <td> <input type="text"  id="neuronex" name="neuronex"></td>
+                    </tr>
+                    <tr>
+                        <td> Structures de données avancées en Python </td>
+                        <td> <input type="text" id="pyor" name="pyor" >></td>
+                        <td> <input type="text" id="pyds" name="pyds"></td>
+                        <td> <input type="text" id="pytp" name="pytp"></td>
+                        <td> <input type="text"  id="pyex" name="pyex"></td>
+                    </tr>
+                    <tr>
+                        <td> Techniques de construction d’analyseurs lexico syntaxiques </td>
+                        <td> <input type="text" id="lexor" name="lexor" >></td>
+                        <td> <input type="text" id="lexds" name="lexds"></td>
+                        <td> <input type="text" id="lextp" name="lextp"></td>
+                        <td> <input type="text" id="lexex" name="lexex"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Applications logicielles d'entreprise </td>
+                        <td> <input type="text" id="entor" name="entor" >></td>
+                        <td> <input type="text" id="entds" name="entds"></td>
+                        <td> <input type="text" id="enttp" name="enttp"></td>
+                        <td> <input type="text" id="entex" name="entex"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Modélisation UML/OCL</td>
+                        <td> <input type="text" id="umlor" name="umlor" >></td>
+                        <td> <input type="text" id="umlds" name="umlds"></td>
+                        <td> <input type="text" id="umltp" name="umltp"></td>
+                        <td><input type="text" id="umlex" name="umlex"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Programmation Web avancée</td>
+                        <td> <input type="text" id="webor" name="webor" >></td>
+                        <td> <input type="text" id="webds" name="webds"></td>
+                        <td> <input type="text" id="webtp" name="webtp"></td>
+                        <td><input type="text" id="webex" name="webex"></td>
+                        
+                    </tr>
+
+                    <tr>
+                        <td> Programmation mobile</td>
+                        <td> <input type="text" id="mobor" name="mobor" >></td>
+                        <td> <input type="text" id="mobds" name="mobds"></td>
+                        <td> <input type="text" id="mobtp" name="mobtp"></td>
+                        <td><input type="text" id="mobex" name="mobex"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Projet Web/mobile </td>
+                        <td> <input type="text" id="pr_webmobor" name="pr_webmobor" >></td>
+                        <td> <input type="text" id="pr_webmobds" name="pr_webmobds"></td>
+                        <td> <input type="text" id="pr_webmobtp" name="pr_webmobtp"></td>
+                        <td><input type="text" id="pr_webmobex" name="pr_webmobex"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Anglais certification 1 </td>
+                        <td> <input type="text" id="ang1or" name="ang1or" >></td>
+                        <td> <input type="text" id="ang1ds" name="ang1ds"></td>
+                        <td> <input type="text" id="ang1tp" name="ang1tp"></td>
+                        <td><input type="text" id="ang1ex" name="ang1ex"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Français certification 1</td>
+                        <td> <input type="text" id="fr1or" name="fr1or" >></td>
+                        <td> <input type="text" id="fr1ds" name="fr1ds"></td>
+                        <td> <input type="text" id="fr1tp" name="fr1tp"></td>
+                        <td><input type="text" id="fr1ex" name="fr1ex"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Techniques de communication 1 : communication et connaissance du soi</td>
+                        <td> <input type="text" id="techcom1or" name="techcom1or" >></td>
+                        <td> <input type="text" id="techcom1ds" name="techcom1ds"></td>
+                        <td> <input type="text" id="techcom1tp" name="techcom1tp"></td>
+                        <td><input type="text" id="techcom1ex" name="techcom1ex"></td>
+                        
+                    </tr>
+                    <tr class="separator-row">
+                        <td colspan="2"><hr class="separator"></td>
+                    </tr>
+                    <tr>
+                        <td> Processus stochastique </td>
+                        <td> <input type="text" id="stockor" name="stockor" >></td>
+                        <td> <input type="text" id="stockds" name="stockds"></td>
+                        <td> <input type="text" id="stocktp" name="stocktp"></td>
+                        <td><input type="text" id="stockex" name="stockex"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Optimisation combinatoire </td>
+                        <td> <input type="text" id="optor" name="optor" >></td>
+                        <td> <input type="text" id="optds" name="optds"></td>
+                        <td> <input type="text" id="opttp" name="opttp"></td>
+                        <td><input type="text" id="optex" name="optex"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Conception et analyse d'algorithmes </td>
+                        <td> <input type="text" id="concor" name="concor" >></td>
+                        <td> <input type="text" id="concds" name="concds"></td>
+                        <td> <input type="text" id="conctp" name="conctp"></td>
+                        <td><input type="text" id="concex" name="concex"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Frama-C et la preuve de programmes </td>
+                        <td> <input type="text" id="framacor" name="framacor" >></td>
+                        <td> <input type="text" id="framacds" name="framacds"></td>
+                        <td> <input type="text" id="framactp" name="framactp"></td>
+                        <td><input type="text" id="framacex" name="framacex"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Algorithmes d'apprentissage automatique </td>
+                        <td> <input type="text" id="framacor" name="mlor" >></td>
+                        <td> <input type="text" id="framacds" name="mlds"></td>
+                        <td> <input type="text" id="framactp" name="mltp"></td>
+                        <td><input type="text" id="framacex" name="mlex"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Projet SI </td>
+                        <td> <input type="text" id="prSIor" name="prSIor" >></td>
+                        <td> <input type="text" id="prSIds" name="prSIds"></td>
+                        <td> <input type="text" id="prSItP" name="prSItP"></td>
+                        <td><input type="text" id="prSIex" name="prSIex"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Ingénierie et interopérabilité des systèmes informatiques </td>
+                        <td> <input type="text" id="interoor" name="interoor" >></td>
+                        <td> <input type="text" id="interods" name="interods"></td>
+                        <td> <input type="text" id="interotp" name="interotp"></td>
+                        <td><input type="text" id="interoex" name="interoex"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Fondements de l’Intelligence Artificielle  </td>
+                        <td> <input type="text" id="fondIAor" name="fondIAor" >></td>
+                        <td> <input type="text" id="fondIAds" name="fondIAds"></td>
+                        <td> <input type="text" id="fondIAtP" name="fondIAtP"></td>
+                        <td><input type="text" id="fondIAex" name="fondIAex"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Français certification 2  </td>
+                        <td> <input type="text" id="fr2or" name="fr2or" >></td>
+                        <td> <input type="text" id="fr2ds" name="fr2ds"></td>
+                        <td> <input type="text" id="fr2tp" name="fr2tp"></td>
+                        <td><input type="text" id="fr2ex" name="fr2ex"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Anglais certification 2  </td>
+                        <td> <input type="text" id="ang2or" name="ang2or" >></td>
+                        <td> <input type="text" id="ang2ds" name="ang2ds"></td>
+                        <td> <input type="text" id="ang2tp" name="ang2tp"></td>
+                        <td><input type="text" id="ang2ex" name="ang2ex"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Techniques de communication 2 : pitching   </td>
+                        <td> <input type="text" id="techcomm2or" name="techcomm2or" >></td>
+                        <td> <input type="text" id="techcomm2ds" name="techcomm2ds"></td>
+                        <td> <input type="text" id="techcomm2tp" name="techcomm2tp"></td>
+                        <td><input type="text" id="techcomm2ex" name="techcomm2ex"></td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+            <center><button type="submit">submit notes</button></center>
+        </form>
+        </section>
+
+    </main>
+<script>
+    
+
+const search = document.querySelector('.input-group input'),
+    table_rows = document.querySelectorAll('tbody tr'),
+    table_headings = document.querySelectorAll('thead th');
+
+// 1. Searching for specific data of HTML table
+search.addEventListener('input', searchTable);
+
+function searchTable() {
+    table_rows.forEach((row, i) => {
+        let table_data = row.textContent.toLowerCase(),
+            search_data = search.value.toLowerCase();
+
+        row.classList.toggle('hide', table_data.indexOf(search_data) < 0);
+        row.style.setProperty('--delay', i / 25 + 's');
+    })
+
+    document.querySelectorAll('tbody tr:not(.hide)').forEach((visible_row, i) => {
+        visible_row.style.backgroundColor = (i % 2 == 0) ? 'transparent' : '#0000000b';
+    });
+}
+
+// 2. Sorting | Ordering data of HTML table
+
+table_headings.forEach((head, i) => {
+    let sort_asc = true;
+    head.onclick = () => {
+        table_headings.forEach(head => head.classList.remove('active'));
+        head.classList.add('active');
+
+        document.querySelectorAll('td').forEach(td => td.classList.remove('active'));
+        table_rows.forEach(row => {
+            row.querySelectorAll('td')[i].classList.add('active');
+        })
+
+        head.classList.toggle('asc', sort_asc);
+        sort_asc = head.classList.contains('asc') ? false : true;
+
+        sortTable(i, sort_asc);
+    }
+})
+
+
+function sortTable(column, sort_asc) {
+    [...table_rows].sort((a, b) => {
+        let first_row = a.querySelectorAll('td')[column].textContent.toLowerCase(),
+            second_row = b.querySelectorAll('td')[column].textContent.toLowerCase();
+
+        return sort_asc ? (first_row < second_row ? 1 : -1) : (first_row < second_row ? -1 : 1);
+    })
+        .map(sorted_row => document.querySelector('tbody').appendChild(sorted_row));
+}
+
+// 3. Converting HTML table to PDF
+
+const pdf_btn = document.querySelector('#toPDF');
+const customers_table = document.querySelector('#customers_table');
+
+
+const toPDF = function (customers_table) {
+    const html_code = `
+    <!DOCTYPE html>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <main class="table" id="customers_table">${customers_table.innerHTML}</main>`;
+
+    const new_window = window.open();
+     new_window.document.write(html_code);
+
+    setTimeout(() => {
+        new_window.print();
+        new_window.close();
+    }, 400);
+}
+
+pdf_btn.onclick = () => {
+    toPDF(customers_table);
+}
+
+// 4. Converting HTML table to JSON
+
+const json_btn = document.querySelector('#toJSON');
+
+const toJSON = function (table) {
+    let table_data = [],
+        t_head = [],
+
+        t_headings = table.querySelectorAll('th'),
+        t_rows = table.querySelectorAll('tbody tr');
+
+    for (let t_heading of t_headings) {
+        let actual_head = t_heading.textContent.trim().split(' ');
+
+        t_head.push(actual_head.splice(0, actual_head.length - 1).join(' ').toLowerCase());
+    }
+
+    t_rows.forEach(row => {
+        const row_object = {},
+            t_cells = row.querySelectorAll('td');
+
+        t_cells.forEach((t_cell, cell_index) => {
+            const img = t_cell.querySelector('img');
+            if (img) {
+                row_object['customer image'] = decodeURIComponent(img.src);
+            }
+            row_object[t_head[cell_index]] = t_cell.textContent.trim();
+        })
+        table_data.push(row_object);
+    })
+
+    return JSON.stringify(table_data, null, 4);
+}
+
+json_btn.onclick = () => {
+    const json = toJSON(customers_table);
+    downloadFile(json, 'json')
+}
+
+// 5. Converting HTML table to CSV File
+
+const csv_btn = document.querySelector('#toCSV');
+
+const toCSV = function (table) {
+    // Code For SIMPLE TABLE
+    // const t_rows = table.querySelectorAll('tr');
+    // return [...t_rows].map(row => {
+    //     const cells = row.querySelectorAll('th, td');
+    //     return [...cells].map(cell => cell.textContent.trim()).join(',');
+    // }).join('\n');
+
+    const t_heads = table.querySelectorAll('th'),
+        tbody_rows = table.querySelectorAll('tbody tr');
+
+    const headings = [...t_heads].map(head => {
+        let actual_head = head.textContent.trim().split(' ');
+        return actual_head.splice(0, actual_head.length - 1).join(' ').toLowerCase();
+    }).join(',') + ',' + 'image name';
+
+    const table_data = [...tbody_rows].map(row => {
+        const cells = row.querySelectorAll('td'),
+            img = decodeURIComponent(row.querySelector('img').src),
+            data_without_img = [...cells].map(cell => cell.textContent.replace(/,/g, ".").trim()).join(',');
+
+        return data_without_img + ',' + img;
+    }).join('\n');
+
+    return headings + '\n' + table_data;
+}
+
+csv_btn.onclick = () => {
+    const csv = toCSV(customers_table);
+    downloadFile(csv, 'csv', 'customer orders');
+}
+
+// 6. Converting HTML table to EXCEL File
+
+const excel_btn = document.querySelector('#toEXCEL');
+
+const toExcel = function (table) {
+    // Code For SIMPLE TABLE
+    // const t_rows = table.querySelectorAll('tr');
+    // return [...t_rows].map(row => {
+    //     const cells = row.querySelectorAll('th, td');
+    //     return [...cells].map(cell => cell.textContent.trim()).join('\t');
+    // }).join('\n');
+
+    const t_heads = table.querySelectorAll('th'),
+        tbody_rows = table.querySelectorAll('tbody tr');
+
+    const headings = [...t_heads].map(head => {
+        let actual_head = head.textContent.trim().split(' ');
+        return actual_head.splice(0, actual_head.length - 1).join(' ').toLowerCase();
+    }).join('\t') + '\t' + 'image name';
+
+    const table_data = [...tbody_rows].map(row => {
+        const cells = row.querySelectorAll('td'),
+            img = decodeURIComponent(row.querySelector('img').src),
+            data_without_img = [...cells].map(cell => cell.textContent.trim()).join('\t');
+
+        return data_without_img + '\t' + img;
+    }).join('\n');
+
+    return headings + '\n' + table_data;
+}
+
+excel_btn.onclick = () => {
+    const excel = toExcel(customers_table);
+    downloadFile(excel, 'excel');
+}
+
+const downloadFile = function (data, fileType, fileName = '') {
+    const a = document.createElement('a');
+    a.download = fileName;
+    const mime_types = {
+        'json': 'application/json',
+        'csv': 'text/csv',
+        'excel': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    }
+    a.href = `
+        data:${mime_types[fileType]};charset=utf-8,${encodeURIComponent(data)}
+    `;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+}
+
+</script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

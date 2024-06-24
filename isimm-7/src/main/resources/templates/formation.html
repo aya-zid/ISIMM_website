@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Animated Flex Cards</title>
+    <style> @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+        * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #eeeeea;
+}
+
+.wrapper {
+    margin-top: 150px;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    height: 400px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: start;
+}
+
+.card {
+    width: 60px;
+    border-radius: .75rem;
+    background-size: cover;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 2rem;
+    margin: 0 10px;
+    display: flex;
+    align-items: flex-end;
+    transition: .6s cubic-bezier(.28,-0.03,0,.99);
+    box-shadow: 0px 10px 30px -5px rgba(0,0,0,0.8);
+}
+
+.card > .row {
+    color: white;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.card > .row > .icon {
+    background: rgb(0, 0, 11);
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+}
+
+.card > .row > .description {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    height: 150px;
+    width: 450px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition-delay: .3s;
+    transition: all .3s ease;
+}
+.description{
+    margin-bottom: 10px;
+}
+.description p {
+    color: white;
+    padding-top: 1px;
+    background-color: black;border: 2px solid rgb(242, 239, 239); padding: 5px;
+    font-size: small;
+}
+
+.description h4 {
+    color: rgb(8, 140, 192);
+    text-transform: uppercase;
+    background-color: black;border: 4px solid rgb(240, 235, 235); padding: 5px;
+}
+
+input {
+    display: none;
+}
+
+input:checked + label {
+    width: 600px;
+}
+
+input:checked + label .description {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.card[for="c1"] {
+    background-image: url('99.jpg');
+}
+.card[for="c2"] {
+    background-image: url('22.jpg');
+}
+.card[for="c3"] {
+    background-image: url('33.jpg');
+}
+.card[for="c4"] {
+    background-image: url('44.jpg');
+}
+.card[for="c5"] {
+    background-image: url('rr.jpg');
+}
+.card[for="c6"] {
+    background-image: url('cod.jpg');
+}
+.card[for="c7"] {
+    background-image: url('77.jpg');
+}
+.card[for="c8"] {
+    background-image: url('88.jpg');
+}
+.card[for="c9"] {
+    background-image: url('11.jpg');
+}
+.card[for="c10"] {
+    background-image: url('10.jpg');
+}
+.card[for="c11"] {
+    background-image: url('111.jpg');
+}
+.card[for="c12"] {
+    background-image: url('12.png');
+}
+.card[for="c13"] {
+    background-image: url('prep.jpg');
+}
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <input type="radio" name="slide" id="c1" checked>
+            <label for="c1" class="card">
+                <div class="row">
+                    <div class="icon">1</div>
+                    <div class="description">
+                        <h4>INGÉNIEURS ELECTRONIQUE ET MICROÉLECTRONIQUE</h4>
+                        <p>CYCLE : Ingénieur</p>
+                        <p>DÉPARTEMENT : Technologie</p>
+                        <p><a href="http://www.isimm.rnu.tn//storage/app/public/Plans%20des%20%C3%A9tudes/PlanDesEtudes-ING-ElecuElec-2021-2022.pdf" target="_blank" rel="noopener"><span style="color: #3333ff;">Plan d`etude</span></a></p>
+                    </div>
+                </div>
+            </label>
+            <input type="radio" name="slide" id="c2" >
+            <label for="c2" class="card">
+                <div class="row">
+                    <div class="icon">2</div>
+                    <div class="description">
+                        <h4>INGÉNIEURS INFORMATIQUE</h4>
+                        <p>CYCLE : Ingénieur</p>
+                        <p>DÉPARTEMENT : Informatique</p>
+                        <p><a href="http://www.isimm.rnu.tn//storage/app/public/Plans%20des%20%C3%A9tudes/ING_Info.pdf" target="_blank" rel="noopener"><span style="color: #3333ff;">Plan d`etude</span></a></p>
+                    </div>
+                </div>
+            </label>
+            <input type="radio" name="slide" id="c3" >
+            <label for="c3" class="card">
+                <div class="row">
+                    <div class="icon">3</div>
+                    <div class="description">
+                        <h4>LICENCE EEA(SE)</h4>
+                        <p>CYCLE : Licence</p>
+                        <p>DÉPARTEMENT : Technologique</p>
+                        <p><a href="http://www.isimm.rnu.tn//storage/app/public/Plans%20des%20%C3%A9tudes/PlanEtudes-Licence-EEA-SE.pdf" target="_blank" rel="noopener"><span style="color: #3333ff;">Plan d`etude</span></a></p>
+                    </div>
+                </div>
+            </label>
+            <input type="radio" name="slide" id="c4" >
+            <label for="c4" class="card">
+                <div class="row">
+                    <div class="icon">4</div>
+                    <div class="description">
+                        <h4>LICENCE EEA(MIM)</h4>
+                        <p>CYCLE : Licence</p>
+                        <p>DÉPARTEMENT : Technologique</p>
+                        <p><a href="http://www.isimm.rnu.tn//storage/app/public/Plans%20des%20%C3%A9tudes/PlanEtudes-Licence-EEA-MIM.pdf" target="_blank" rel="noopener"><span style="color: #3333ff;">Plan d`etude</span></a></p>
+                    </div>
+                </div>
+            </label>
+            <input type="radio" name="slide" id="c5" >
+            <label for="c5" class="card">
+                <div class="row">
+                    <div class="icon">5</div>
+                    <div class="description">
+                        <h4>LICENCE MATHÉMATIQUES APPLIQUÉES</h4>
+                        <p>CYCLE : Licence</p>
+                        <p>DÉPARTEMENT : Mathématique</p>
+                        <p><a href="http://www.isimm.rnu.tn//storage/app/public/Plans%20des%20%C3%A9tudes/Math+%C2%AEmatique.pdf" target="_blank" rel="noopener"><span style="color: #3333ff;">Plan d`etude</span></a></p>
+                    </div>
+                </div>
+            </label>
+            <input type="radio" name="slide" id="c6" >
+            <label for="c6" class="card">
+                <div class="row">
+                    <div class="icon">6</div>
+                    <div class="description">
+                        <h4>LICENCE SCIENCES DE L’INFORMATIQUE</h4>
+                        <p>CYCLE : Licence</p>
+                        <p>DÉPARTEMENT : Informatique</p>
+                    </div>
+                </div>
+            </label>
+
+            <input type="radio" name="slide" id="c7" >
+            <label for="c7" class="card">
+                <div class="row">
+                    <div class="icon">7</div>
+                    <div class="description">
+                        <h4>LICENCE TIC(RIOT)</h4>
+                        <p>CYCLE : Licence</p>
+                        <p>DÉPARTEMENT : Technologie</p>
+                        <p><a href="http://www.isimm.rnu.tn//storage/app/public/Plans%20des%20%C3%A9tudes/PlanDesEtudes-Licence-TIC-RIOT.pdf" target="_blank" rel="noopener"><span style="color: #3333ff;">Plan d`etude</span></a></p>
+                    </div>
+                </div>
+            </label>
+            <input type="radio" name="slide" id="c8" >
+            <label for="c8" class="card">
+                <div class="row">
+                    <div class="icon">8</div>
+                    <div class="description">
+                        <h4>MASTER DE RECHERCHE EN GÉNIE LOGICIEL</h4>
+                        <p>CYCLE : Mastere de recherche</p>
+                        <p>DÉPARTEMENT : Informatique</p>
+                    </div>
+                </div>
+            </label>
+            <input type="radio" name="slide" id="c9" >
+            <label for="c9" class="card">
+                <div class="row">
+                    <div class="icon">9</div>
+                    <div class="description">
+                        <h4>MASTER DE RECHERCHE EN MICROÉLECTRONIQUE ET INSTRUMENTATION</h4>
+                        <p>CYCLE : Mastere de recherche</p>
+                        <p>DÉPARTEMENT : Technologique</p>
+                        <p><a href="http://www.isimm.rnu.tn/storage/app/public/Plans%20des%20%C3%A9tudes/plan%20des%20%C3%A9tudes%20MR_micro%C3%A9lectronique%20(approuv%C3%A9%20CU)2022-2026.pdf" target="_blank" rel="noopener"><span style="color: #3333ff;">Plan d`etude</span></a></p>
+                    </div>
+                </div>
+            </label>
+
+            <input type="radio" name="slide" id="c10">
+            <label for="c10" class="card">
+                <div class="row">
+                    <div class="icon">10</div>
+                    <div class="description">
+                        <h4>MASTER PROFESSIONNEL : DATA SCIENCE</h4>
+                        <p>CYCLE : Mastere Professionnel</p>
+                        <p>DÉPARTEMENT : Mathématique</p>
+                    </div>
+                </div>
+            </label>
+            <input type="radio" name="slide" id="c11" >
+            <label for="c11" class="card">
+                <div class="row">
+                    <div class="icon">11</div>
+                    <div class="description">
+                        <h4>MASTER PROFESSIONNEL : INGÉNIERIE EN INSTRUMENTATION INDUSTRIELLE</h4>
+                        <p>CYCLE : Mastere Professionnel</p>
+                        <p>DÉPARTEMENT : Technologique</p>
+                        <p><a href="http://www.isimm.rnu.tn//storage/app/public/Plans%20des%20%C3%A9tudes/plan%20des%20etudes%203I.pdf" target="_blank" rel="noopener"><span style="color: #3333ff;">Plan d`etude</span></a></p>
+                    </div>
+                </div>
+            </label>
+            <input type="radio" name="slide" id="c12" >
+            <label for="c12" class="card">
+                <div class="row">
+                    <div class="icon">12</div>
+                    <div class="description">
+                        <h4> MASTER PROFESSIONNEL EN GÉNIE LOGICIEL</h4>
+                        <p>CYCLE : Mastere Professionnel</p>
+                        <p>DÉPARTEMENT : Informatique</p>
+                    </div>
+                </div>
+            </label>
+            <input type="radio" name="slide" id="c13" >
+            <label for="c13" class="card">
+                <div class="row">
+                    <div class="icon">13</div>
+                    <div class="description">
+                        <h4>PRÉPARATOIRE INTÉGRÉ EN INFORMATIQUE</h4>
+                        <p>CYCLE : Preparatoire integre</p>
+                        <p>DÉPARTEMENT : Informatique</p>
+                    </div>
+                </div>
+            </label>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const hash = window.location.hash; // Get the hash part of the URL
+            const radioInput = document.querySelector(`input[name="slide"][id="${hash.substring(1)}"]`);
+            if (radioInput) {
+                radioInput.checked = true; // Check the corresponding radio button
+            }
+        });
+    </script>
+</body>
+</html>

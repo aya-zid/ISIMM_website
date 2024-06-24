@@ -1,0 +1,273 @@
+<style>
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+h1{
+    font-family: 'Poppins', sans-serif;border: 5px solid rgb(242, 239, 239); padding: 10px;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url(img2.jpeg);
+    
+
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    flex-wrap: wrap;
+    padding: 40px 0;
+
+}
+
+.container .card {
+    position: relative;
+    width: 320px;
+    height: 440px;
+    box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.05),
+        inset -5px -5px 5px rgba(255, 255, 255, .05),
+        5px 5px 5px rgba(0, 0, 0, 0.05),
+        -5px -5px 5px rgba(255, 255, 255, .05);
+    border-radius: 15px;
+    margin: 30px;
+    background-color: rgb(134, 201, 228);
+}
+.container .card.card1 .box {
+    background-image: url('cpu.jpg');
+}
+.container .card.card2 .box {
+    background-image: url('ieee.jpg');
+    margin-top: 35px;
+    justify-content: center;
+}
+.container .card.card3 .box {
+    background-image: url('eng.jpg');
+    margin-top: 40px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+.container .card.card4 .box {
+    background-image: url('cri.jpg');
+    margin-top: 30px;
+    margin-bottom: 35px;
+    justify-content: center;
+}
+.container .card.card5 .box {
+    background-image: url('mic.jpg');
+    margin-top: 30px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+.container .card.card6 .box {
+    background-image: url('atia.jpg');
+    margin-top: 30px;
+    margin-bottom: 35px;
+    justify-content: center;
+}
+
+.container .card .box {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    background-color: #ebf5fc;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+
+
+.container .card:nth-child(1):hover .box {
+    transform: translateY(-50px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, #373B44, #4286f4);
+}
+
+
+.container .card:nth-child(2):hover .box {
+    transform: translateY(-50px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, #009FFF, #ec2F4B);
+}
+
+.container .card:nth-child(3):hover .box {
+    transform: translateY(-50px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, #3a1c71, #d76d77, #ffaf7b);
+}
+
+.container .card:nth-child(4):hover .box {
+    transform: translateY(-50px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, #3a1c71, #d76d77, #ffaf7b);
+}
+.container .card:nth-child(5):hover .box {
+    transform: translateY(-50px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, #3a1c71, #d76d77, #ffaf7b);
+}
+.container .card:nth-child(6):hover .box {
+    transform: translateY(-50px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, #3a1c71, #d76d77, #ffaf7b);
+}
+
+.container .card .box .content {
+    padding: 20px;
+    text-align: center;
+}
+
+.container .card .box .content h2 {
+    position: absolute;
+    top: -10px;
+    right: 30px;
+    font-size: 8em;
+    color: rgba(0, 0, 0, 0.06);
+}
+
+.container .card:hover .box .content h2 {
+    color: rgba(0, 0, 0, 0.08);
+}
+
+.container .card .box .content h3 {
+    font-size: 1.8em;
+    color: transparent;
+    z-index: 1;
+    transition: 0.5s;
+
+}
+
+.container .card .box .content p {
+    font-size: 1em;
+    font-weight: 300;
+    color: transparent;
+    z-index: 1;
+    transition: 0.5s;
+}
+
+.container .card:hover .box .content h3,
+.container .card:hover .box .content p {
+    color: #fff;
+}
+
+.container .card .box .content a {
+    position: relative;
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #03a9f4;
+    margin-top: 15px;
+    border-radius: 20px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 400;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.02);
+}
+
+.container .card:hover .box .content a {
+    background-color: #ff568f;
+}
+.title-container {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 30px;
+  }
+
+  .title-container h1 {
+    font-size: 5em;
+    color: white;
+  }
+</style>
+<div class="title-container">
+    <h1>CLUBS ISIMM</h1>
+  </div>
+<div class="container">
+    <div class="card card1">
+        <div class="box" >
+            <div class="content" >
+                <h2>01</h2>
+                <h3>CPU</h3>
+                <p>
+                    Un club novateur dédié au traitement cybernétique, favorisant l'exploration et la collaboration dans le domaine des technologies de l'information.
+                </p><br><br>
+                <a href="https://www.facebook.com/CPU.ISIMM/">View page</a>
+            </div>
+        </div>
+    </div>
+    <div class="card card2">
+        <div class="box">
+            <div class="content">
+                <h2>02</h2>
+                <h3>IEEE</h3>
+                <p>
+                    Une société académique avant-gardiste axée sur la technologie, l'innovation et la collaboration au sein de la communauté universitaire.
+                </p><br><br>
+                <a href="https://www.facebook.com/IEEEISIMMSB/">View page</a>
+            </div>
+        </div>
+    </div>
+    <div class="card card3">
+        <div class="box">
+            <div class="content">
+                <h2>03</h2>
+                <h3>Englistics</h3>
+                <p>
+                    Un groupe dynamique dédié à la lecture en anglais, favorisant le développement des compétences linguistiques et littéraires..
+                </p><br><br>
+                <a href="https://www.facebook.com/Englistics.isimm">View page</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card4">
+        <div class="box">
+            <div class="content">
+                <h2>04</h2>
+                <h3>CRI</h3>
+                <p>
+                    CRI est un groupe des jeunes actifs doués par la conception et le développement robotique à l'ISIMM.
+                </p><br><br>
+                <a href="https://www.facebook.com/C.R.ISIMM">View page</a>
+            </div>
+        </div>
+    </div>
+    <div class="card card5">
+        <div class="box">
+            <div class="content">
+                <h2>05</h2>
+                <h3>Microsoft</h3>
+                <p>
+                    Une communauté universitaire dynamique centrée sur les technologies Microsoft, promouvant l'innovation et la collaboration dans le domaine de l'informatique et des logiciels..
+                </p>
+                <a href="https://www.facebook.com/MTC.ISIMM">View page</a>
+            </div>
+        </div>
+    </div>
+    <div class="card card6">
+        <div class="box">
+            <div class="content">
+                <h2>06</h2>
+                <h3>ATIA</h3>
+                <p>
+                    un club universitaire technologique spécialisé en intelligence artificielle ayant un but éducatif.
+                </p><br><br><br><br>
+                <a href="https://www.facebook.com/profile.php?id=100086600541050">View page</a>
+            </div>
+        </div>
+    </div>
+</div>

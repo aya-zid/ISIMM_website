@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymeLeaf.org">
+<head>
+	<style>
+
+/* CSS */
+.button-62 {
+  background: linear-gradient(to bottom right, rgb(255, 0, 0), rgb(192, 192, 192));
+  border: 0;
+  border-radius: 12px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 2.5;
+  outline: transparent;
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+.button-63 {
+  background: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(0, 0, 0));
+  border: 0;
+  border-radius: 12px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 2.5;
+  outline: transparent;
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+.button-64 {
+  background: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(192, 192, 192));
+  border: 0;
+  border-radius: 12px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 2.5;
+  outline: transparent;
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+
+.button-62:not([disabled]):focus {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+.button-62:not([disabled]):hover {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+
+.button-80 {
+  background: #fff;
+  backface-visibility: hidden;
+  border-radius: .300rem;
+  border-style: solid;
+  border-width: .100rem;
+  box-sizing: border-box;
+  size: 50px;
+  color: #212121;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Circular,Helvetica,sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  line-height: 1.3;
+  padding: .800rem 1.100rem;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transform: translateZ(0) scale(1);
+  transition: transform .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-80:not(:disabled):hover {
+  transform: scale(1.05);
+}
+
+.button-80:not(:disabled):hover:active {
+  transform: scale(1.05) translateY(.125rem);
+}
+
+.button-80:focus {
+  outline: 0 solid transparent;
+}
+
+.button-80:focus:before {
+  content: "";
+  left: calc(-1*.375rem);
+  pointer-events: none;
+  position: absolute;
+  top: calc(-1*.375rem);
+  transition: border-radius;
+  user-select: none;
+}
+
+.button-80:focus:not(:focus-visible) {
+  outline: 0 solid transparent;
+}
+
+.button-80:focus:not(:focus-visible):before {
+  border-width: 0;
+}
+
+.button-80:not(:disabled):active {
+  transform: translateY(.125rem);
+}
+@media (min-width: 768px) {
+  .button-54 {
+    padding: 0.25em 0.75em;
+  }
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Liste des étudiants</title>
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+	<div class="container mt-5">
+	<div class="card">
+		<div class="card-header"><h2 >Liste de tous les étudiants de l'isimm</h2></div>
+	    <div class="card-body">
+			<form method="get" th:action="@{students}">
+				<div class="form-group">
+					<label>cycle</label>
+					<select id="cycle" name="key1">
+    <option value="Ingénieurs" th:selected="${key1 == 'Ingénieurs'}">Ingénieurs</option>
+    <option value="Licence" th:selected="${key1 == 'Licence'}">Licence</option>
+    <option value="Mastère de recherche" th:selected="${key1 == 'Mastère de recherche'}">Mastère de recherche</option>
+    <option value="Mastère professionnel" th:selected="${key1 == 'Mastère professionnel'}">Mastère professionnel</option>
+    <option value="Preparatoire intégrée" th:selected="${key1 == 'Preparatoire intégrée'}">Preparatoire intégrée</option>
+</select>
+ 
+ <label for="specialite" style="margin-left: 7px;">Specialité:</label>
+              <select id="specialite" name="key2">
+                <option value="ingénieur électronique et microélectronique">ingénieur électronique et microélectronique</option>
+                <option value="ingénieur informatique">ingénieur informatique</option>
+                <option value="licence EEA : systèmes embarqués">licence EEA : systèmes embarqués</option>
+                <option value="licence EEA : mesure instrumentation et métrologie">licence EEA : mesure instrumentation et métrologie</option>
+                <option value="licence en mathematiques appliquées">licence en mathematiques appliquées</option>
+                <option value="licence en sciences de l'informatique">licence en sciences de l'informatique</option>
+                <option value="licence TIC : réseaux et IOT">licence TIC : réseaux et IOT</option>
+                <option value="mastère de recherche : génie logiciel">mastère de recherche : génie logiciel</option>
+                <option value="mastère de recherche : microélectronique et instrumentation">mastère de recherche : microélectronique et instrumentation</option>
+                <option value="mastère professionel: data science">mastère professionel: data science</option>
+                <option value="mastère professionel: génie logiciel">mastère professionel: génie logiciel</option>
+                <option value="mastère professionel: ingénierie en instrumentation industrielle">mastère professionel: ingénierie en instrumentation industrielle</option>
+                <option value="préparatoire en informatique">préparatoire en informatique</option>
+            </select>
+			<label for="niveauEtude" style="margin-left: 7px;">Niveau d'Etude:</label>
+            <select id="niveauEtude" name="key3">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            
+					<button class="button-80" style="margin-left: 20px;">Chercher</button>
+				</div>
+			</form>
+	<table class="table">
+	<tr>
+		<th>CIN</th><th>Nom</th><th>Prénom</th><th>Cycle</th><th>Spécialité</th><th>Niveau</th><th>Email</th>
+	</tr>
+	<tr th:each="s:${students}">
+		<td th:text="${s.CIN}"></td>
+		<td th:text="${s.nom}"></td>
+		<td th:text="${s.prenom}"></td>
+		<td th:text="${s.cycle}"></td>
+		<td th:text="${s.specialite}"></td>
+		<td th:text="${s.niveauEtude}"></td>
+		<td th:text="${s.email}"></td>
+		<td><a onclick="return confirm ('etes vous sure de vouloir supprimer?')" class="button-62"
+		       th:href="@{deleteStudent(id=${s.CIN},page=${currentPage},key1=${key1},key2=${key2},key3=${key3},size=${size})}">Delete</a></td>
+	     <td><a class="button-63"
+		       th:href="@{editStudent(id=${s.CIN},page=${currentPage},key1=${key1},key2=${key2},key3=${key3},size=${size})}">Edit</a></td>
+		 <td><a class="button-64"
+		       th:href="@{infoStudent(id=${s.CIN},page=${currentPage},key1=${key1},key2=${key2},key3=${key3},size=${size})}">info</a></td>
+	</tr>
+</table>
+<ul class="nav nav-pills">
+	<li  th:each="page,status:${pages}">
+		<a th:class="${status.index==currentPage? 'btn btn-primary':'btn'}" 
+		th:href="@{/students(page=${status.index},key1=${key1},key2=${key2},key3=${key3})}" th:text="${status.index}"></a>
+		
+	</li>
+</ul>
+
+</div>
+	</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>ajouter un etudiant</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(#2196f3, #e91e63);
+    overflow: hidden;
+}
+
+.wrapper {
+    position: relative;
+    width: 500px;
+    height: 715px;
+}
+.infoSection {
+    margin-top: 20px;
+}
+.infoSection h3 {
+    font-size: 24px;
+    color: #555;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.infoSection label {
+    font-size: 15px;
+    display: block;
+    margin-bottom: 2px;
+    color: #333;
+}
+
+.infoSection input,
+.infoSection select {
+    width: 100%;
+    height: 25px;
+    font-size: 15px;
+    color: #333;
+    padding: 0 10px;
+    background: transparent;
+    border: 1px solid #333;
+    outline: none;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+.form-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: vertical;
+    padding: 30px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+.wrapper.animate-signIn .form-wrapper.sign-up,
+.wrapper.animate-signUp .form-wrapper.sign,
+.wrapper.animate-sign .form-wrapper.sign-sig,
+.wrapper.animate-signSig .form-wrapper.sign-in {
+    animation: animateRotate .7s ease-in-out forwards;
+    animation-delay: .3s;
+}
+
+.wrapper.animateSignUp .form-wrapper.sign-in,
+.wrapper.animate-signIn .form-wrapper.sig,
+.wrapper.animate-signUp .form-wrapper.sign,
+.wrapper.animate-signSig .form-wrapper.sign {
+    animation: animateRotate .7s ease-in-out forwards;
+    animation-delay: .3s;
+}
+
+.wrapper.animateSignUp .form-wrapper.sign-in,
+.wrapper.animate-signUp .form-wrapper.sign-up,
+.wrapper.animate-signIn .form-wrapper.sign,
+.wrapper.animate-signSig .form-wrapper.sig {
+    animation: animateRotate .7s ease-in-out forwards;
+    animation-delay: .3s;
+}
+
+
+
+.form-wrapper.sign-sig {
+            transform: rotate(14deg);
+        }
+
+        .wrapper.animate-signSig .form-wrapper.sign-sig {
+            animation: animateSignSig 1.5s ease-in-out forwards;
+        }
+
+@keyframes animateSignSig {
+    0% {
+        transform: translateX(0);
+        z-index: 1;
+    }
+
+    50% {
+        transform: translateX(500px);
+    }
+
+    100% {
+        transform: translateX(0) rotate(14deg);
+    }
+}
+
+@keyframes animateSignIn {
+    0% {
+        transform: translateX(0);
+        
+    }
+
+    50% {
+        transform: translateX(500px);
+    }
+
+    100% {
+        transform: translateX(0) rotate(7deg);
+    }
+}
+
+.wrapper .form-wrapper.sign-up {
+    transform: rotate(7deg);
+}
+
+.wrapper.animate-signIn .form-wrapper.sign-up {
+    animation: animateRotate .7s ease-in-out forwards;
+    animation-delay: .3s;
+}
+.wrapper.animate-signUp .form-wrapper.sign {
+    animation: animateRotate .7s ease-in-out forwards;
+    animation-delay: .3s;
+}
+.wrapper.animate-sign .form-wrapper.sign-sig {
+    animation: animateRotate .7s ease-in-out forwards;
+    animation-delay: .3s;
+}
+.wrapper.animate-signSig .form-wrapper.sign-in {
+    animation: animateRotate .7s ease-in-out forwards;
+    animation-delay: .3s;
+}
+
+@keyframes animateRotate {
+    0% {
+        transform: rotate(7deg);
+    }
+
+    100% {
+        transform: rotate(0);
+        z-index: 1;
+    }
+}
+
+.wrapper.animate-signUp .form-wrapper.sign-up {
+    animation: animateSignUp 1.5s ease-in-out forwards;
+}
+.wrapper.animate-signIn .form-wrapper.sign-in {
+    animation: animateSignUp 1.5s ease-in-out forwards;
+}
+.wrapper.wrapper.animate-signSig .form-wrapper.sign-sig {
+    animation: animateSignUp 1.5s ease-in-out forwards;
+}
+@keyframes animateSignUp {
+    0% {
+        transform: translateX(0);
+        z-index: 1;
+    }
+
+    50% {
+        transform: translateX(500px);
+    }
+
+    100% {
+        transform: translateX(0) rotate(7deg);
+    }
+}
+
+h2 {
+    font-size: 30px;
+    background: linear-gradient(to right, #2196f3, #e91e63);
+    text-align: center;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.input-group {
+    margin-top: 20px;
+    position: relative;
+    width: 320px;
+    margin: 30px 0;
+}
+
+.input-group label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #333;
+    padding: 0 5px;
+    pointer-events: none;
+    transition: .5s;
+
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    height: 25px;
+    font-size: 16px;
+    color: #333;
+    padding: 0 10px;
+    background: transparent;
+    border: 1px solid #333;
+    outline: none;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.input-group input:focus~label,
+.input-group input:valid~label {
+    top: 0;
+    font-size: 12px;
+    background: #fff;
+}
+
+.forgot-pass {
+    margin: -15px 0 15px;
+}
+
+.forgot-pass a {
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.forgot-pass a:hover {
+    text-decoration: underline;
+}
+
+.btn2, .btn3, .btn4{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(to right, #2196f3, #e91e63);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .4);
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+#btn1{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(to right, #2196f3, #e91e63);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .4);
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.sign-link {
+    font-size: 14px;
+    text-align: center;
+    margin: 25px 0;
+}
+
+.sign-link p {
+    color: #333;
+}
+
+.sign-link p a {
+    color: #e91e63;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.sign-link p a:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+    <form  th:action="@{saveStudent}" method="post" th:object="${student}">
+    
+        <div class="form-wrapper sign-sig">
+            <div class="infoSection">
+                <h2>Information Parentales</h2>
+                <label for="nompere">Nom Pere:</label>
+                <input type="text" id="nompere" name="nompere" th:value="${student.nompere}">
+    
+                <label for="prenompere">Prenom Pere:</label>
+                <input type="text" id="prenompere" name="prenompere" th:value="${student.prenompere}">
+    
+                <label for="nommere">Nom Mere:</label>
+                <input type="text" id="nommere" name="nommere" th:value="${student.nommere}">
+    
+                <label for="prenommere">Prenom Mere:</label>
+                <input type="text" id="prenommere" name="prenommere" th:value="${student.prenommere}">
+    
+                <label for="addresseparent">Adresse Parent:</label>
+                <input type="text" id="addresseparent" name="addresseparent" th:value="${student.addresseparent}">
+    
+                <label for="numtelparent">Numéro de Téléphone Parent:</label>
+                <input type="text" id="numtelparent" name="numtelparent" th:value="${student.numtelparent}">
+                <button class="btn4" type="submit">Ajouter</button>
+            </div>
+        </div>
+
+        <div class="form-wrapper sign">
+          <div class="infoSection">
+          <h2>Information BAC</h2>
+          <label for="annebac">Anne Bac:</label>
+          <input type="text" id="annebac" name="annebac"th:value="${student.annebac}">
+          </div>
+          <div class="infoSection">
+            <label for="sectionbac">Section Bac:</label>
+            <select id="sectionbac" name="sectionbac"th:value="${student.sectionbac}">
+                <option value="mathématiques">Mathématiques</option>
+                <option value="sciences expérimentales">Sciences Expérimentales</option>
+                <option value="sciences techniques">Sciences Techniques</option>
+                <option value="informatique">Informatique</option>
+                <option value="economie et gestion">Economie et Gestion</option>
+                <option value="lettres">Lettres</option>
+                <option value="autre">Autre</option>
+            </select>
+          </div>
+          <div class="infoSection">
+            <label for="sessionbac">Session Bac:</label>
+            <select id="sessionbac" name="sessionbac" th:value="${student.sessionbac}">
+                <option value="principale">Principale</option>
+                <option value="controle">Contrôle</option>
+            </select>
+          </div>
+          <div class="infoSection">
+            <label for="mentionbac">Mention Bac:</label>
+            <select id="mentionbac" name="mentionbac" th:value="${student.mentionbac}">
+                <option value="trés bien">Très Bien</option>
+                <option value="bien">Bien</option>
+                <option value="assez bien">Assez Bien</option>
+                <option value="passable">Passable</option>
+            </select>
+          </div>
+          <div class="infoSection">
+            <label for="moybac">Moyenne Bac:</label>
+            <input type="text" id="moybac" name="moybac" th:value="${student.moybac}">
+          </div>
+          <div class="infoSection">
+            <label for="paysbac">Pays Bac:</label>
+            <input type="text" id="paysbac" name="paysbac" th:value="${student.paysbac}">
+          </div>
+
+          <input type="button" class="btn3" value="page suivante" />
+        </div>
+
+        <div class="form-wrapper sign-up">
+          <div class="infoSection">
+          <h2>informations d'études</h2>
+          <label for="cycle">Cycle:</label>
+          <select id="cycle" name="cycle" th:value="${student.cycle}">
+              <option value="Ingénieurs">Ingénieurs</option>
+              <option value="Licence">Licence</option>
+              <option value="Mastère de recherche">Mastère de recherche</option>
+              <option value="Mastère professionnel">Mastère professionnel</option>
+              <option value="Preparatoire intégrée">Preparatoire intégrée</option>
+          </select>
+          </div>
+          <div class="infoSection">
+            <label for="specialite">Specialité:</label>
+              <select id="specialite" name="specialite" th:value="${student.specialite}">
+                 <option value="ingénieur électronique et microélectronique">ingénieur électronique et microélectronique</option>
+                <option value="ingénieur informatique">ingénieur informatique</option>
+                <option value="licence EEA : systèmes embarqués">licence EEA : systèmes embarqués</option>
+                <option value="licence EEA : mesure instrumentation et métrologie">licence EEA : mesure instrumentation et métrologie</option>
+                <option value="licence en mathematiques appliquées">licence en mathematiques appliquées</option>
+                <option value="licence en sciences de l'informatique">licence en sciences de l'informatique</option>
+                <option value="licence TIC : réseaux et IOT">licence TIC : réseaux et IOT</option>
+                <option value="mastère de recherche : génie logiciel">mastère de recherche : génie logiciel</option>
+                <option value="mastère de recherche : microélectronique et instrumentation">mastère de recherche : microélectronique et instrumentation</option>
+                <option value="mastère professionel: data science">mastère professionel: data science</option>
+                <option value="mastère professionel: génie logiciel">mastère professionel: génie logiciel</option>
+                <option value="mastère professionel: ingénierie en instrumentation industrielle">mastère professionel: ingénierie en instrumentation industrielle</option>
+                <option value="préparatoire en informatique">préparatoire en informatique</option>
+            </select>
+          </div>
+          <div class="infoSection">
+            <label for="niveauEtude">Niveau d'Etude:</label>
+            <select id="niveauEtude" name="niveauEtude" th:value="${student.niveauEtude}">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+          </div>
+          <div class="infoSection">
+            <label for="groupeTD">Groupe TD:</label>
+            <input type="text" id="groupeTD" name="groupeTD" th:value="${student.groupeTD}">
+          </div>
+          <div class="infoSection">
+            <label for="groupeTP">Groupe TP:</label>
+            <input type="text" id="groupeTP" name="groupeTP" th:value="${student.groupeTP}">
+          </div>
+          <div class="infoSection">
+            <label for="Situation">Situation:</label>
+            <select id="Situation" name="Situation" th:value="${student.Situation}">
+                <option value="nouveau">Nouveau</option>
+                <option value="redoublant">Redoublant</option>
+                <option value="muté">Muté</option>
+                <option value="dérogataire">Dérogataire</option>
+            </select>
+          </div>
+          <div class="infoSection">
+            <label for="EtablissementPrecedent">Etablissement Précédent:</label>
+            <input type="text" id="EtablissementPrecedent" name="EtablissementPrecedent" th:value="${student.EtablissementPrecedent}">
+          </div>
+           <input type="button" class="btn2" value="page suivante" />
+        </div>
+      
+        <div class="form-wrapper sign-in">
+            <div class="infoSection">
+                <h2>informations personnels</h2>
+                <label for="cin">CIN:</label>
+                <input type="text" id="cin" name="CIN" th:value="${student.CIN}">
+
+                <label for="nom">Nom:</label>
+                <input type="text" id="nom" name="nom" th:value="${student.nom}">
+
+                <label for="prenom">Prenom:</label>
+                <input type="text" id="prenom" name="prenom" th:value="${student.prenom}">
+
+                <label for="naissance">Date de Naissance:</label>
+                <input type="date" id="naissance" name="naissance" th:value="${student.naissance}">
+
+                <label for="sexe">Sexe:</label>
+                <select id="sexe" name="sexe" th:value="${student.sexe}">
+                    <option value="feminin">Feminin</option>
+                    <option value="masculin">Masculin</option>
+                </select>
+
+                <label for="nationalite">Nationalite:</label>
+                <input type="text" id="nationalite" name="nationalite" th:value="${student.nationalite}">
+
+                <label for="etatcivil">Etat Civil:</label>
+                <select id="etatcivil" name="etatcivil" th:value="${student.etatcivil}">
+                    <option value="célibataire">Célibataire</option>
+                    <option value="marié(e)">Marié(e)</option>
+                    <option value="divorcé(e)">Divorcé(e)</option>
+                    <option value="veuf(ve)">Veuf(ve)</option>
+                </select>
+
+                <label for="adresse">Adresse:</label>
+                <input type="text" id="adresse" name="adresse" th:value="${student.adresse}">
+
+                <label for="numtel">Numéro de Téléphone:</label>
+                <input type="text" id="numtel" name="numtel" th:value="${student.numtel}">
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" th:value="${student.email}" required>
+                <input type="button" id="btn1" value="page suivante" />
+            </div>    
+        </div>
+    </form>
+</div>
+<script >
+const wrapper = document.querySelector('.wrapper');
+const signInLink = document.querySelector('#btn1');
+const signUpLink = document.querySelector('.btn2');
+const signLink = document.querySelector('.btn3');
+const sigLink = document.querySelector('.btn4'); // Added button for the fourth page
+
+signInLink.addEventListener('click', () => {
+    wrapper.classList.add('animate-signIn');
+    wrapper.classList.remove('animate-signUp', 'animate-sign', 'animate-signSig'); // Remove 'animate-signSig' when going back to sign-in
+});
+
+signUpLink.addEventListener('click', () => {
+    wrapper.classList.add('animate-signUp');
+    wrapper.classList.remove('animate-signIn', 'animate-sign', 'animate-signSig'); // Remove 'animate-signSig' when going to sign-up
+});
+
+signLink.addEventListener('click', () => {
+    wrapper.classList.add('animate-sign');
+    wrapper.classList.remove('animate-signIn', 'animate-signUp', 'animate-signSig'); // Remove 'animate-signSig' when going to sign
+});
+
+sigLink.addEventListener('click', () => {
+    wrapper.classList.add('animate-signSig'); // Add animation class for the fourth page
+    wrapper.classList.remove('animate-signIn', 'animate-signUp', 'animate-sign'); // Remove other animation classes
+});
+</script>
+</body>
+</html>
