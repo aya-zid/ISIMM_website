@@ -47,4 +47,8 @@ so if a student forget their password they can contact the admin and ask them fo
  
   - add the admin account manually into the database : in the table "account" add the cin , username and password. in the table "role" add the cin , username and the user_role ( must be : "ROLE_ADMIN")
  
+  - run the project as a spring boot app
+ 
+  - write "http://localhost:8090/home" in ur web navigator to see the website 
+ 
   - when adding the timetable or the marks , u will get a list of all the grades well the only one working is "ingenieur informatique 1" and i explained in the code in comments how to make all the grades accessible ( i mean for the admin to be able to add timetables and marks for everyone ). i just didn't do it myself because i don't know the subjects of the other grades but i made it clear in the comments how to code it as it is the same way i coded timetable and marks for "ingenieur info 1"
